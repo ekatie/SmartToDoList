@@ -1,7 +1,7 @@
 ## FRONT END
 
 - HTML
-  - navigation bar
+  - navigation bar (Tom)
   - login page
   - list page (logged in user)
     - form for new item
@@ -21,13 +21,13 @@
 - API integration
   - Connect with external APIs (Chat GPT, Google, Wolfram Alpha, Rotten Tomatoes, Amazon, Yelp).
   - Retrieve information for auto-categorization.
-- Routes / DB
+- Routes / DB (Katie)
  - Browse list items
  - Read details about item
  - Edit item category
  - Add new item
  - Delete item from list
-- DB
+- DB (Peter)
   - create tables
   - insert data into tables
 - SQL Queries
