@@ -3,37 +3,46 @@
 - HTML
   - navigation bar
   - login page
-  - profile update page
   - list page (logged in user)
+    - form for new item
   - routes
 - SCSS (CSS)
-  - styling
+  - page styling for nav bar, sign in page, and list view page
   - responsive design for mobile/desktop
 - jQuery
   - add new item (show dynamically)
 - Error Handling
   - display relevant message
+- Category Modification
+  - interface for users to change category (HTML, JS, jQuery)
 
 ## BACK END
 
 - API integration
-  - Connect with external APIs (Google, Wolfram Alpha, Rotten Tomatoes, Amazon, Yelp).
+  - Connect with external APIs (Chat GPT, Google, Wolfram Alpha, Rotten Tomatoes, Amazon, Yelp).
   - Retrieve information for auto-categorization.
-  - chat GPT to determine category?
-  - second API to pull data based on above result?
-- Routes
-- SQL queries
-  - Write queries to fetch and update data in the database.
+- Routes / DB
+- Browse list items
+- Read details about item
+- Edit item category
+- Add new item
+- Delete item from list
 - DB
   - create tables
   - insert data into tables
-- Queries
+- SQL Queries
   - Add item to list
   - Update item status (complete/incomplete)
   - Add timestamp for creation and completion
-  - User deactivate profile
   - Update category for item
+  - Deleting item
+- Error Handling
+  - API calls
+  - DB queries
+  - Provide info to users
+- Password hashing
 
+## Ask Julian
 
 
 ## Front-End Ingredients (HTML, CSS, JS, jQuery):
