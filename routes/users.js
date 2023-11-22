@@ -6,10 +6,29 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 
 router.get('/', (req, res) => {
   res.render('users');
-}); 
+});
+
+
+// log user in - localhost:####/login/7
+router.get('/login/:user_id', (req, res) => {
+
+  /* set cookie
+  ex: req.cookies.user_id = req.params.user-id;
+
+  OR
+
+  cookie-parser
+  res.cookie('user_id', req.params.user_id);
+  */
+
+  // send the user somewhere (sign in landing page)
+  res.redirect('/items');
+});
+
+
 
 module.exports = router;
