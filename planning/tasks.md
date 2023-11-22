@@ -1,4 +1,4 @@
-## FRONT END
+## FRONT END - HTML, CSS, JS, jQuery
 
 - HTML
   - navigation bar (Tom)
@@ -16,7 +16,7 @@
 - Category Modification
   - interface for users to change category (HTML, JS, jQuery)
 
-## BACK END
+## BACK END - node, express, postgres
 
 - API integration
   - Connect with external APIs (Chat GPT, Google, Wolfram Alpha, Rotten Tomatoes, Amazon, Yelp).
