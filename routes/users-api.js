@@ -6,7 +6,7 @@
  */
 
 const express = require('express');
-const router  = express.Router();
+const router = express.Router();
 const userQueries = require('../db/queries/users');
 
 router.get('/', (req, res) => {
@@ -22,3 +22,22 @@ router.get('/', (req, res) => {
 });
 
 module.exports = router;
+
+/* from video
+module.exports = (db) => {
+  router.get('/', (req, res) => {
+    db.query('SELECT * FROM users;')
+    .then(data => {
+      const users = data.rows;
+      res.json({users});
+    })
+    .catch(err => {
+      res
+      .status(500)
+      .json({error: err.message});
+    })
+  })
+  return router;
+}
+
+*/
