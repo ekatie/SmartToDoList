@@ -36,7 +36,7 @@ router.get('/login/:user_id', (req, res) => {
   */
 
   // send the user somewhere (logged in user landing page)
-  res.redirect('/items');
+  res.redirect('/tasks');
 });
 
 
