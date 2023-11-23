@@ -52,3 +52,7 @@
 - Sign Up and Porfile Editing are stretch
 - It is fine to use ChatGPT as an API to know which category the todo is
 - It is also fine to look for keywords ("read", "watch", "eat", "buy"...) to guess which category it could be before doing any API call.
+
+HTML Pages
+- /home (logged in user)
+- /login (not logged in user)
