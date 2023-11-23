@@ -6,7 +6,7 @@
   </div>
   <span>Smart To Do List</span>
   <!-- If user is logged in, displays logout button -->
-  <% if(user !==undefined){ %>
+  <% if(undefined !== undefined){ %>
     <form action="/logout" method="POST">
       <h5 style="width: 300px; margin: 1em" />Logged in as: <%= user["email"] %>
         </h5>
@@ -24,6 +24,3 @@
     </div>
 </nav>
 </header>
-
-<!-- Displays header in index.ejs with -->
-<!-- <%- include('partials/_header') %> -->

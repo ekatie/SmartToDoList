@@ -23,12 +23,10 @@ nav {
     margin-left: 5px;
   }
 
-  p {
-    margin: 6px 12px 12px 12px;
-  }
-
   span {
     font-family: 'Bungee', sans-serif;
+font-weight: bold;
+font-size: 2rem;
   }
 
   button {
@@ -42,6 +40,10 @@ nav {
     margin: 10px;
     width: 100px;
   }
+}
+
+button {
+border: none;
 }
 
 
