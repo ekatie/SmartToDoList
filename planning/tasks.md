@@ -2,15 +2,15 @@
 
 - HTML
   - navigation bar (Tom)
-  - login page
+  - login page (Tom)
   - list page (logged in user)
-    - form for new item
+    - form for new task
   - routes
 - SCSS (CSS)
   - page styling for nav bar, sign in page, and list view page
   - responsive design for mobile/desktop
 - jQuery
-  - add new item (show dynamically)
+  - add new task (show dynamically)
 - Error Handling
   - display relevant message
 - Category Modification
@@ -19,23 +19,23 @@
 ## BACK END - node, express, postgres
 
 - API integration
-  - Connect with external APIs (Chat GPT, Google, Wolfram Alpha, Rotten Tomatoes, Amazon, Yelp).
+  - Connect with external APIs (Chat GPT, Google, Wolfram Alpha, IMDB, Amazon, Yelp).
   - Retrieve information for auto-categorization.
 - Routes / DB (Katie)
- - Browse list items
- - Read details about item
- - Edit item category
- - Add new item
- - Delete item from list
+ - Browse list tasks
+ - Read details about task
+ - Edit task category
+ - Add new task
+ - Delete task from list
 - DB (Peter)
   - create tables
   - insert data into tables
 - SQL Queries
-  - Add item to list
-  - Update item status (complete/incomplete)
+  - Add task to list
+  - Update task status (complete/incomplete)
   - Add timestamp for creation and completion
-  - Update category for item
-  - Deleting item
+  - Update category for task
+  - Deleting task
 - Error Handling
   - API calls
   - DB queries
@@ -44,6 +44,11 @@
 
 
 ## Ask Julian
-- sign up for users
-- profile edit
+- sign up for users (Stretch)
+- profile edit (Stretch)
 - chat GPT API?
+
+## Answers
+- Sign Up and Porfile Editing are stretch
+- It is fine to use ChatGPT as an API to know which category the todo is
+- It is also fine to look for keywords ("read", "watch", "eat", "buy"...) to guess which category it could be before doing any API call.
