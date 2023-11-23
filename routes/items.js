@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const database = require("../db/database");
 
-// show all items
+// show all tasks
 router.get('/', (req, res) => {
   // Check if user is logged in, if not then redirect to login page
   const userId = req.session.userId;
@@ -10,25 +10,23 @@ router.get('/', (req, res) => {
     return res.redirect('/login');
   }
 
-  // User logged in, display users items
+  // User logged in, display users tasks
   database
-    .getUserItems(userId)
-    .then((items) => res.send({ items }))
+    .getUserTasks(userId)
+    .then((tasks) => res.send({ tasks }))
     .catch((e) => {
       console.error(e);
       res.send(e);
     });
 });
 
-// select single item
+// select single task
+// likely not needed, as it's rendered on the same page and editing will be shown dynamically
 router.get('/:id', (req, res) => {
-
-
-
   // res.render('/:id');
 });
 
-// add new item
+// add new task
 router.post('/', (req, res) => {
 
   // Check if user is logged in, if not then redirect to login page
@@ -37,12 +35,12 @@ router.post('/', (req, res) => {
     return res.redirect('/login');
   }
 
-  const newItem = req.body;
-  newItem.user_id = userId;
+  const newTask = req.body;
+  newTask.user_id = userId;
 
   database
-    .addItem(userId)
-    .then((item) => res.send(item))
+    .addTask(userId)
+    .then((task) => res.send(task))
     .catch((e) => {
       console.error(e);
       res.send(e);
@@ -50,30 +48,31 @@ router.post('/', (req, res) => {
 
 });
 
-// update single item
+// update single task
 router.post('/:id', (req, res) => {
 
+  // Check if user is logged in, if not then redirect to login page
+  const userId = req.session.userId;
+  if (!userId) {
+    return res.redirect('/login');
+  }
+
+  const task = req.body;
+  newTask.user_id = userId;
+
   // update status (complete/incomplete) OR category
-
-  // if category $1 = category, if status $1 = status + change boolean value based on current (if true, set false - if false, set true)
-
-  // SQL
-  const query = `
-UPDATE items 
-SET $1 = $2 
-WHERE item.id = $3;`;
-
+  // if category - editTaskCategory(), if status - updateTaskStatus()
 
 });
 
-// delete single item
+// delete single task
 router.post('/:id/delete', (req, res) => {
 
 
   // SQL
   const query = `
-  DELETE FROM items 
-  WHERE item.id = $1`;
+  DELETE FROM tasks 
+  WHERE task.id = $1`;
 
 
 });
