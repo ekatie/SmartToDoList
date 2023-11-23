@@ -5,39 +5,39 @@ html {
   margin: 0;
 }
 
-// nav {
-//   width: 100%;
-//   display: flex;
-//   height: 120px;
-//   background-color: #3739bf;
-//   color: #FFFFFF;
-//   padding-left: 1.5em;
-//   padding-right: 1.5em;
-//   align-items: center;
-//   justify-content: space-between;
-//   position: fixed;
-//   top: 0;
+nav {
+  width: 100%;
+  display: flex;
+  height: 120px;
+  background-color: #3739bf;
+  color: #FFFFFF;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
 
-//   img {
-//     height: 50px;
-//   }
+  img {
+    height: 50px;
+  }
 
-//   p {
-//     margin: 12px;
-//   }
+  p {
+    margin: 12px;
+  }
 
-//   span {
-//     font-family: 'Bungee', sans-serif;
-//   }
+  span {
+    font-family: 'Bungee', sans-serif;
+  }
 
-//   .fa-solid {
-//     display: flex;
-//     justify-content: center;
-//     color: red;
-//   }
-// button {
-// border-radius:15%;}
-// }
+  .fa-solid {
+    display: flex;
+    justify-content: center;
+    color: red;
+  }
+button {
+border-radius:15%;}
+}
 
 //  @media screen and (min-width: 992px) {
 //     nav {
