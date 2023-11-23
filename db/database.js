@@ -33,10 +33,6 @@ const getUserTasks = function (userId) {
     .query(query, [userId])
     .then((result) => {
       return result.rows;
-    })
-    .catch((err) => {
-      console.error("Error fetching user tasks:", err);
-      return Promise.reject(err);
     });
 };
 
@@ -48,18 +44,15 @@ const getUserTasks = function (userId) {
 const addTask = function (task) {
 
   const query = `
-INSERT INTO tasks (user_id, category_id, description, status, created_date, priority, due_date) 
+INSERT INTO tasks (user_id, category_id, description, isComplete, created_date, priority, due_date) 
 VALUES ($1, $2, $3, $4, $5, $6, $7);`;
 
-  const values = [task.user_id, task.category_id, task.description, task.status, task.created_date, task.priority, task.due_date];
+  const values = [task.user_id, task.category_id, task.description, task.isComplete, task.created_date, task.priority, task.due_date];
 
   return pool
     .query(query, values)
     .then((newTask) => {
       return newTask;
-    })
-    .catch((err) => {
-      return Promise.reject(err);
     });
 };
 
@@ -68,23 +61,23 @@ VALUES ($1, $2, $3, $4, $5, $6, $7);`;
  * @param {{}} task An object containing all of the task details.
  * @return {Promise<{}>} A promise to the task category.
  */
-const editTaskCategory = function (task) {
+const editTaskCategory = function (taskId, taskCategoryId) {
 
   const query = `
   UPDATE tasks 
   SET category_id = $1 
   WHERE task.id = $2;`;
 
-  const values = [task.category_id, task.id];
+// Returning? else editedTask is undefined. check!
+
+  const values = [taskCategoryId, taskId];
 
   return pool
     .query(query, values)
     .then((editedTask) => {
       return editedTask;
-    })
-    .catch((err) => {
-      return Promise.reject(err);
     });
+
 };
 
 /**
@@ -92,25 +85,21 @@ const editTaskCategory = function (task) {
  * @param {{}} task An object containing all of the task details.
  * @return {Promise<{}>} A promise to the task status.
  */
-const updateTaskStatus = function (task) {
-
-  // change boolean value of status based on current (if true, set false - if false, set true)
+const updateTaskStatus = function (taskId, isComplete) {
 
   const query = `
   UPDATE tasks 
-  SET status = $1 
+  SET isComplete = $1 
   WHERE task.id = $2;`;
 
-  const values = [task.status, task.id];
+  const values = [isComplete, taskId];
 
   return pool
     .query(query, values)
     .then((editedTask) => {
       return editedTask;
-    })
-    .catch((err) => {
-      return Promise.reject(err);
     });
+
 };
 
 module.exports = {
