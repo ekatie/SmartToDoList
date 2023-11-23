@@ -15,16 +15,18 @@ const getUserWithId = function (userId) {
 };
 
 /**
- * Get all items for a single user.
+ * Get all tasks for a single user.
  * @param {string} userId The id of the user.
- * @return {Promise<[{}]>} A promise to return the items.
+ * @return {Promise<[{}]>} A promise to return the tasks.
  */
-const getUserItems = function (userId) {
+const getUserTasks = function (userId) {
 
   const query = `
-  SELECT * 
-  FROM items 
-  WHERE user_id = $1
+  SELECT tasks.* 
+  FROM tasks 
+  JOIN users ON tasks.user_id = users.id 
+  JOIN categories ON tasks.category_id = categories.id 
+  WHERE user_id = $1 
   ORDER BY priority DESC, created_date DESC;`;
 
   return pool
@@ -33,28 +35,78 @@ const getUserItems = function (userId) {
       return result.rows;
     })
     .catch((err) => {
-      console.error("Error fetching user items:", err);
+      console.error("Error fetching user tasks:", err);
       return Promise.reject(err);
     });
 };
 
 /**
- * Add a item to the list.
- * @param {{}} item An object containing all of the item details.
- * @return {Promise<{}>} A promise to the item.
+ * Add a task to the list.
+ * @param {{}} task An object containing all of the task details.
+ * @return {Promise<{}>} A promise to the task.
  */
-const addItem = function (item) {
+const addTask = function (task) {
 
   const query = `
-INSERT INTO items (user_id, description, category, status, created_date, priority, due_date) 
+INSERT INTO tasks (user_id, category_id, description, status, created_date, priority, due_date) 
 VALUES ($1, $2, $3, $4, $5, $6, $7);`;
 
-  const values = [item.user_id, item.description, item.category, item.status, item.created_date, item.priority, item.due_date];
+  const values = [task.user_id, task.category_id, task.description, task.status, task.created_date, task.priority, task.due_date];
 
   return pool
     .query(query, values)
-    .then((newItem) => {
-      return newItem;
+    .then((newTask) => {
+      return newTask;
+    })
+    .catch((err) => {
+      return Promise.reject(err);
+    });
+};
+
+/**
+ * Update a task category on the list.
+ * @param {{}} task An object containing all of the task details.
+ * @return {Promise<{}>} A promise to the task category.
+ */
+const editTaskCategory = function (task) {
+
+  const query = `
+  UPDATE tasks 
+  SET category_id = $1 
+  WHERE task.id = $2;`;
+
+  const values = [task.category_id, task.id];
+
+  return pool
+    .query(query, values)
+    .then((editedTask) => {
+      return editedTask;
+    })
+    .catch((err) => {
+      return Promise.reject(err);
+    });
+};
+
+/**
+ * Update a task status on the list.
+ * @param {{}} task An object containing all of the task details.
+ * @return {Promise<{}>} A promise to the task status.
+ */
+const updateTaskStatus = function (task) {
+
+  // change boolean value of status based on current (if true, set false - if false, set true)
+
+  const query = `
+  UPDATE tasks 
+  SET status = $1 
+  WHERE task.id = $2;`;
+
+  const values = [task.status, task.id];
+
+  return pool
+    .query(query, values)
+    .then((editedTask) => {
+      return editedTask;
     })
     .catch((err) => {
       return Promise.reject(err);
@@ -63,6 +115,8 @@ VALUES ($1, $2, $3, $4, $5, $6, $7);`;
 
 module.exports = {
   getUserWithId,
-  getUserItems,
-  addItem
+  getUserTasks,
+  addTask,
+  editTaskCategory,
+  updateTaskStatus
 };
