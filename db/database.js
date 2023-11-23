@@ -27,7 +27,7 @@ const getUserTasks = function (userId) {
   JOIN users ON tasks.user_id = users.id 
   JOIN categories ON tasks.category_id = categories.id 
   WHERE user_id = $1 
-  ORDER BY priority DESC, created_date DESC;`;
+  ORDER BY isPriority DESC, created_date DESC;`;
 
   return pool
     .query(query, [userId])
@@ -44,10 +44,10 @@ const getUserTasks = function (userId) {
 const addTask = function (task) {
 
   const query = `
-INSERT INTO tasks (user_id, category_id, description, isComplete, created_date, priority, due_date) 
+INSERT INTO tasks (user_id, category_id, description, isComplete, created_date, isPriority, due_date) 
 VALUES ($1, $2, $3, $4, $5, $6, $7);`;
 
-  const values = [task.user_id, task.category_id, task.description, task.isComplete, task.created_date, task.priority, task.due_date];
+  const values = [task.user_id, task.category_id, task.description, task.isComplete, task.created_date, task.isPriority, task.due_date];
 
   return pool
     .query(query, values)
@@ -68,7 +68,7 @@ const editTaskCategory = function (taskId, taskCategoryId) {
   SET category_id = $1 
   WHERE task.id = $2;`;
 
-// Returning? else editedTask is undefined. check!
+  // Returning? else editedTask is undefined. check!
 
   const values = [taskCategoryId, taskId];
 
