@@ -1,6 +1,5 @@
 # Routes
 
-B  GET          /users
 R  GET          /users/:id
 E  POST         /users/:id
 A  POST         /users
