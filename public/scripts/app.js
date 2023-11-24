@@ -7,15 +7,21 @@
  */
 const checkForCategoryKeywords = (taskDescription) => {
   const keywordMapping = {
-    'eat': 1,
-    'read': 2,
-    'watch': 3,
-    'buy': 4
+    1: ['eat', 'dine', 'food', 'take-out', 'cook', 'restaurant', 'meal'],
+    2: ['read', 'author', 'book', 'novel', 'literature', 'textbook'],
+    3: ['watch', 'movie', 'tv show', 'episode', 'stream', 'series', 'film'],
+    4: ['buy', 'shop', 'purchase', 'order']
   };
 
-  for (const keyword of Object.keys(keywordMapping)) {
-    if (taskDescription.toLowerCase().includes(keyword)) {
-      return keywordMapping[keyword];
+  for (const categoryId in keywordMapping) {
+    const keywords = keywordMapping[categoryID];
+
+    for (const keyword of keywords) {
+      if (taskDescription.toLowerCase().includes(keyword)) {
+        return Number(categoryId);
+      }
     }
   }
+
+  return undefined;
 };
