@@ -46,6 +46,11 @@ nav {
     max-width: 300px;
     width: 100%
   }
+
+  .right-column {
+    display: flex;
+    justify-content: right;
+  }
 }
 
 button {
