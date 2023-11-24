@@ -65,3 +65,13 @@ x /login (not logged in user)
 - is_complete default is false
 - due_date NOT required
 - description required
+
+
+## HTML Links for js files
+
+<body>
+  <!-- Your HTML content -->
+
+  <!-- Include tasks.js script -->
+  <script src="/routes/tasks.js" defer></script>
+</body>
