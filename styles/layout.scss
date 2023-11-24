@@ -24,20 +24,11 @@ nav {
   }
 
   span {
-    font-family: 'Bungee', sans-serif;
     font-weight: bold;
     font-size: 2rem;
   }
 
   button {
-    color: white;
-    background-color: #0899ff;
-    border-color: white;
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
-    padding: 10px;
-    margin: 10px;
     width: 100px;
   }
 
@@ -50,28 +41,71 @@ nav {
 
 button {
   border: none;
+  color: white;
+  background-color: #0899ff;
+  border-color: white;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
 }
 
 .loginView {
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: solid 1px white;
-  border-radius: 10%;
-  width: auto;
+  border: solid 3px white;
+  border-radius: 25%;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+  width: 500px;
   flex-direction: column;
   color: white;
 
   #signInHeader {
     border-bottom: 3px solid white;
-
   }
-.loginHeader {
-width: 90%;
-padding: 10px;
-font-size: 1.5rem;
+
+  .loginHeader {
+    width: 90%;
+    padding: 12px;
+    font-size: 1.5rem;
+  }
+
+  #loginForm {
+    border-bottom: 3px solid white;
+    width: 90%;
+  }
+
+  #signUpHeader {
+    margin: 0;
+  }
+
+  #signUpBtn {
+    width: 90%;
+    margin: 0px 0px 36px 0px;
+  }
+
+  input {
+    border: solid 1px white;
+    background-color: inherit;
+    height: 100%;
+  }
+
+  .form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: 12px;
+  }
+#loginBtn {
+margin-left: auto;
 }
 }
+
 
 
 
