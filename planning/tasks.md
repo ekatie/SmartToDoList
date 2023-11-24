@@ -1,41 +1,41 @@
-## FRONT END
+## FRONT END - HTML, CSS, JS, jQuery
 
 - HTML
   - navigation bar (Tom)
-  - login page
+  - login page (Tom)
   - list page (logged in user)
-    - form for new item
+    - form for new task
   - routes
 - SCSS (CSS)
   - page styling for nav bar, sign in page, and list view page
   - responsive design for mobile/desktop
 - jQuery
-  - add new item (show dynamically)
+  - add new task (show dynamically)
 - Error Handling
   - display relevant message
 - Category Modification
   - interface for users to change category (HTML, JS, jQuery)
 
-## BACK END
+## BACK END - node, express, postgres
 
 - API integration
-  - Connect with external APIs (Chat GPT, Google, Wolfram Alpha, Rotten Tomatoes, Amazon, Yelp).
+  - Connect with external APIs (Chat GPT, Google, Wolfram Alpha, IMDB, Amazon, Yelp).
   - Retrieve information for auto-categorization.
 - Routes / DB (Katie)
- - Browse list items
- - Read details about item
- - Edit item category
- - Add new item
- - Delete item from list
+ - Browse list tasks
+ - Read details about task
+ - Edit task category
+ - Add new task
+ - Delete task from list
 - DB (Peter)
   - create tables
   - insert data into tables
-- SQL Queries
-  - Add item to list
-  - Update item status (complete/incomplete)
+- SQL Queries (Katie)
+  - Add task to list
+  - Update task status (complete/incomplete)
   - Add timestamp for creation and completion
-  - Update category for item
-  - Deleting item
+  - Update category for task
+  - Deleting task
 - Error Handling
   - API calls
   - DB queries
@@ -43,74 +43,34 @@
 - Password hashing
 
 ## Ask Julian
+- sign up for users (Stretch)
+- profile edit (Stretch)
+- chat GPT API?
+
+## Answers
+- Sign Up and Porfile Editing are stretch
+- It is fine to use ChatGPT as an API to know which category the todo is
+- It is also fine to look for keywords ("read", "watch", "eat", "buy"...) to guess which category it could be before doing any API call.
+
+# NOTES
+
+## HTML Pages
+x /home (logged in user)
+x /login (not logged in user)
+- / for all - renders based on whether user is logged in or not
+
+## Tables
+- is_priority default is false
+- is_complete default is false
+- due_date NOT required
+- description required
 
 
-## Front-End Ingredients (HTML, CSS, JS, jQuery):
+## HTML Links for js files
 
-### Landing Page (HTML):
+<body>
+  <!-- Your HTML content -->
 
-Create a welcoming landing page to greet users.
-Add a form for users to input their todos.
-
-### Form Styling (CSS):
-
-Spice up that form! Make it visually appealing.
-Ensure it's user-friendly for both desktop and mobile users.
-
-### Auto-Categorization Display (HTML, JS):
-
-Show users the automatically categorized result.
-Make it dynamic and responsive using JavaScript.
-
-### User Profile Page (HTML, CSS, JS):
-
-Allow users to view and update their profiles.
-Keep it simple and intuitive.
-
-### Category Modification (HTML, JS, jQuery):
-
-Create an interface for users to modify categories.
-Add some interactive jQuery magic to make it smooth.
-
-### Error Handling (JS):
-
-Implement error messages for mis-categorized or uncategorized items.
-Guide users with helpful hints instead of cryptic messages.
-
-
-## Back-End Ingredients (DB, APIs, SQL Queries, Routes):
-
-### Database Setup (DB):
-
-Choose a database (e.g., MySQL, PostgreSQL) to store user data and todos.
-Set up tables for users, todos, and categories.
-
-### User Authentication (Routes, DB):
-
-Implement user registration and login routes.
-Store user credentials securely in the database.
-
-### API Integration (APIs, Routes):
-
-Connect with external APIs (Google, Wolfram Alpha, Rotten Tomatoes, Amazon, Yelp).
-Retrieve information for auto-categorization.
-
-### SQL Queries (DB, SQL):
-
-Write queries to fetch and update data in the database.
-Ensure efficiency and data integrity.
-
-### Category Modification (Routes, DB):
-
-Create routes to handle category modifications.
-Update the database accordingly.
-
-### User Profile Update (Routes, DB):
-
-Implement routes for users to update their profiles.
-Securely handle profile data changes.
-
-### Error Handling (Routes, DB):
-
-Set up error handling for database queries and API calls.
-Provide clear feedback to users.
+  <!-- Include tasks.js script -->
+  <script src="/routes/tasks.js" defer></script>
+</body>
