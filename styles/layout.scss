@@ -90,15 +90,10 @@ button {
 
   input {
     border: solid 1px white;
-    background-color: inherit;
+    background-color: #6ca9ff;
     height: 2.5rem;
     pointer-events: none;
     width: 75%;
-    border-radius: 25%;
-  }
-
-  input:focus {
-    outline: none;
   }
 
   .form-group {
