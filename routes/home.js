@@ -9,12 +9,11 @@ const express = require('express');
 const router = express.Router();
 
 
-
-router.get('/', (req, res) => {
-  // if logged in redirect to /tasks
-  // if not, redirect to /login
-  res.render('users');
-});
+// router.get('/', (req, res) => {
+//   // if logged in redirect to /tasks
+//   // if not, redirect to /login
+//   res.render('users');
+// });
 
 
 // log user in - localhost:8080/login/7
@@ -25,12 +24,12 @@ router.get('/login/:user_id', (req, res) => {
 
 
   // send the user somewhere (logged in user landing page)
-  res.redirect('/tasks');
+  res.redirect('/');
 });
 
 
 // Logout of account
-app.post('/logout', (req, res) => {
+router.post('/logout', (req, res) => {
   req.session = null;
   res.redirect('/login');
 });
