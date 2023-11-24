@@ -6,7 +6,7 @@
   </div>
   <span>Smart To Do List</span>
   <!-- If user is logged in, displays logout button -->
-  <% if(<!--undefined --> !== undefined){ %>
+  <% if( undefined !== undefined){ %>
     <form action="/logout" method="POST">
       <h5 style="width: 300px; margin: 1em" />Logged in as: <%= user["email"] %>
         </h5>

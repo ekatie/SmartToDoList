@@ -19,8 +19,14 @@
 
 <body>
 <%- include('partials/_header') %>
-
-  <h1>Have fun! 🥔</h1>
+ <!-- If user is logged in, displays logout button -->
+  <% if( undefined !== undefined){ %>
+    <%- include('partials/_list') %>
+      <!-- If user is not logged in, displays links to the register and login views -->
+      <% } else{ %>
+        <%- include('partials/_login') %>
+        <% } %>
+    </div>
 </body>
 
 </html>
