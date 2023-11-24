@@ -125,7 +125,7 @@ button {
   width: 90%;
   background-color: transparent;
   color: #FFFFFF;
-   border: solid 3px white;
+  border: solid 3px white;
   padding-left: 1.5em;
   padding-right: 1.5em;
   border-radius: 25%;
@@ -134,15 +134,18 @@ button {
 
 
   .list-header {
-  display: flex;
-   justify-content: space-between;
-flex-direction: row;
-margin: 12px;
-font-weight: bold;
-img {
-    height: 50px;
-    margin-left: 12px;
-  }
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    margin: 12px;
+    font-weight: bold;
+
+    i {
+      height: 50px;
+      margin-left: 12px;
+      display: flex;
+      align-items: center;
+    }
 
 
     .left-column,
