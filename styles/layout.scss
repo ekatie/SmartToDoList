@@ -25,8 +25,8 @@ nav {
 
   span {
     font-family: 'Bungee', sans-serif;
-font-weight: bold;
-font-size: 2rem;
+    font-weight: bold;
+    font-size: 2rem;
   }
 
   button {
@@ -40,10 +40,16 @@ font-size: 2rem;
     margin: 10px;
     width: 100px;
   }
+
+  .left-column,
+  .right-column {
+    max-width: 300px;
+    width: 100%
+  }
 }
 
 button {
-border: none;
+  border: none;
 }
 
 
