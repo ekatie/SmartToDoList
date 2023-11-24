@@ -43,6 +43,13 @@ const getUserTasks = function (userId) {
  */
 const addTask = function (task) {
 
+  // Determine task category
+  task.category_id = checkForCategoryKeywords(newTask.description);
+
+  if (!task.category_id) {
+    // API call
+  }
+
   const query = `
 INSERT INTO tasks (user_id, category_id, description, is_complete, created_date, is_priority, due_date) 
 VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`;
