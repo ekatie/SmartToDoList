@@ -52,6 +52,27 @@ button {
   border: none;
 }
 
+.loginView {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px white;
+  border-radius: 10%;
+  width: auto;
+  flex-direction: column;
+  color: white;
+
+  #signInHeader {
+    border-bottom: 3px solid white;
+
+  }
+.loginHeader {
+width: 90%;
+padding: 10px;
+font-size: 1.5rem;
+}
+}
+
 
 
 
