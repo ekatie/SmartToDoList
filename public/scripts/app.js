@@ -8,8 +8,8 @@
 const checkForCategoryKeywords = (taskDescription) => {
   const keywordMapping = {
     1: ['eat', 'dine', 'food', 'take-out', 'cook', 'restaurant', 'meal'],
-    2: ['read', 'author', 'book', 'novel', 'literature', 'textbook'],
-    3: ['watch', 'movie', 'tv show', 'episode', 'stream', 'series', 'film'],
+    2: ['watch', 'movie', 'tv show', 'episode', 'stream', 'series', 'film'],
+    3: ['read', 'author', 'book', 'novel', 'literature', 'textbook'],
     4: ['buy', 'shop', 'purchase', 'order']
   };
 
