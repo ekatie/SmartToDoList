@@ -1,5 +1,5 @@
-INSERT INTO categories (name) VALUES ('food');
-INSERT INTO categories (name) VALUES ('movies');
-INSERT INTO categories (name) VALUES ('books');
-INSERT INTO categories (name) VALUES ('products');
-INSERT INTO categories (name) VALUES ('miscellaneous');
+INSERT INTO categories (name) VALUES ('eat');
+INSERT INTO categories (name) VALUES ('watch');
+INSERT INTO categories (name) VALUES ('read');
+INSERT INTO categories (name) VALUES ('buy');
+INSERT INTO categories (name) VALUES ('do');
