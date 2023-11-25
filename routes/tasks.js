@@ -31,10 +31,9 @@ router.post('/', (req, res) => {
 
   const newTask = req.body;
   newTask.user_id = userId;
-  newTask.created_date = new Date();
 
-  // API
-  // newTask.category_id = api result
+  const creationTimestamp = new Date();
+  newTask.created_date = creationTimestamp.toISOString().slice(0, 19).replace("T", " ");
 
   return database
     .addTask(newTask)

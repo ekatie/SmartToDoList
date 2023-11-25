@@ -20,7 +20,7 @@
 
 - Auto-Categorization
   - Check for keywords to assign category (Katie)
-  - API integration
+  - API integration (Peter)
     - Connect with external API (**Chat GPT, Google, Wolfram Alpha, IMDB, Amazon, Yelp).
     - Retrieve information for auto-categorization.
 - Routes / DB (Katie)
@@ -40,7 +40,7 @@
   - Deleting task
 - Error Handling
   - API calls
-  - DB queries
+  - DB queries (Katie)
   - Provide info to users
 - Password hashing
 
@@ -60,12 +60,6 @@
 x /home (logged in user)
 x /login (not logged in user)
 - / for all - renders based on whether user is logged in or not
-
-## Tables
-- is_priority default is false
-- is_complete default is false
-- due_date NOT required
-- description required
 
 
 ## HTML Links for js files
