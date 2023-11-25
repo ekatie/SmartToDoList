@@ -6,9 +6,9 @@ CREATE TABLE tasks (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE,
   description VARCHAR(255) NOT NULL,
-  status BOOLEAN DEFAULT FALSE,
+  is_complete BOOLEAN DEFAULT FALSE,
   created_date TIMESTAMP,
   completed_date TIMESTAMP,
-  priority BOOLEAN,
+  is_priority BOOLEAN,
   due_date DATE
 );
