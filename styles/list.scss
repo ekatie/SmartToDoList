@@ -5,7 +5,33 @@
   padding-left: 1.5em;
   padding-right: 1.5em;
 
+#addItem {
+border: solid 3px white;
+  border-radius: 25px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin: 12px;
+  font-weight: bold;
 
+.left-column,
+  .right-column {
+    max-width: 300px;
+    width: 100%;
+    display: flex;
+  }
+
+  .right-column {
+    justify-content: right;
+    flex-direction: row;
+  }
+
+  .left-column {
+    flex-direction: column;
+    align-items: center;
+  }
+
+}
 
   .list-header {
     display: flex;

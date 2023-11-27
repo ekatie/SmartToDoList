@@ -1,7 +1,40 @@
 <div id="error">Error</div>
+
 <div class="listView-container">
+
   <div id="addItem">
+
+    <div class="left-column">
+      <p>I gotta do this thing:</p>
+      <textarea name="text" id="item-text"></textarea>
+    </div>
+
+    <div class="right-column">
+      <div>
+        <label>Due Date</label>
+        <label>High Priority</label>
+      </div>
+
+      <div>
+        <p>dropdown menu</p>
+        <% if("isChecked"==="isChecked" ){ %>
+          <i class="fa-regular fa-square-check fa-2xl"></i>
+          <% } else{ %>
+            <i class="fa-regular fa-square fa-2xl"></i>
+            <% } %>
+      </div>
+      <div>
+        <form action="/tasks" method="POST">
+          <button type="submit">&#43</button>
+        </form>
+      </div>
+
+
+
+    </div>
   </div>
+
+
   <div class="list-header">
     <div class="left-column">
       <p>VIEW:</p>
@@ -13,10 +46,8 @@
       <i class="fa-regular fa-lightbulb fa-2xl"></i>
     </div>
     <div class="right-column">
-      <form action="/addItem" method="POST">
-        <button type="submit">Add Item &#43</button>
+        <button id = "addItem">Add Item &#43</button>
     </div>
-    </form>
   </div>
   <div id="list-container">
     <article>
