@@ -5,8 +5,8 @@ $(document).ready(function() {
 
   loadList();
 
- const createListElement = function(tweet) {
-    //Create hard coded tweets
+ const createListElement = function(item) {
+    //Create hard coded list items
     const $tweet = $(`<article>
           <div class = 'item-container'>
           <div>

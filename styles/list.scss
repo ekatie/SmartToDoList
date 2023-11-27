@@ -1,13 +1,10 @@
-.list-container {
+.listView-container {
   width: 90%;
   background-color: transparent;
   color: #FFFFFF;
-  border: solid 3px white;
   padding-left: 1.5em;
   padding-right: 1.5em;
-  border-radius: 25%;
-  -moz-border-radius: 25px;
-  -webkit-border-radius: 25px;
+
 
 
   .list-header {
@@ -24,8 +21,9 @@
       align-items: center;
     }
 
-.isActive {
-color: rgb(96, 93, 255);}
+    .isActive {
+      color: rgb(96, 93, 255);
+    }
 
 
     .left-column,
@@ -39,5 +37,63 @@ color: rgb(96, 93, 255);}
     .right-column {
       justify-content: right;
     }
+  }
+}
+
+.list-container {
+  border: solid 3px white;
+  border-radius: 25px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin: 12px;
+  font-weight: bold;
+
+  i {
+    height: 50px;
+    margin-left: 12px;
+    display: flex;
+    align-items: center;
+  }
+
+  .isActive {
+    color: rgb(96, 93, 255);
+  }
+
+
+  .left-column,
+  .right-column {
+    max-width: 300px;
+    width: 100%;
+    display: flex;
+  }
+
+  .right-column {
+    justify-content: right;
+    flex-direction: column;
+  }
+
+  .left-column {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .editIcons {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin: 12px 12px 0px 0px;
+  }
+
+  .timestamp {
+    display: flex;
+    font-size: .75rem;
+    justify-content: right;
+    margin-right: 12px;
+
+  }
+
+  p {
+    margin-left: 12px;
   }
 }
