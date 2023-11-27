@@ -34,3 +34,4 @@ $(document).ready(function() {
     </article>`);
     return $tweet;
   };
+});
