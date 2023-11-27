@@ -27,12 +27,20 @@ nav {
 
   .left-column,
   .right-column {
-    max-width: 300px;
     width: 100%
   }
 
   .right-column {
     display: flex;
     justify-content: right;
+  }
+
+  form {
+    display: flex;
+  }
+
+  h5 {
+    min-width: 100px;
+    align-self: center
   }
 }
