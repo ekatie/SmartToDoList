@@ -15,6 +15,10 @@ const router = express.Router();
 //   res.render('users');
 // });
 
+router.get('/login', (req, res) => {
+  res.render('');
+});
+
 
 // log user in - localhost:8080/login/7
 router.get('/login/:user_id', (req, res) => {
