@@ -35,3 +35,8 @@ $(document).ready(function() {
     return $tweet;
   };
 });
+
+$(".list-header i").click(function(){
+    $(".list-header i").removeClass("isActive");
+    $(this).addClass("isActive");
+  });
