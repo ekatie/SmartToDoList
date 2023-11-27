@@ -3,7 +3,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   background: #73abfa;
 font-family: 'Bungee', sans-serif;
   // background: linear-gradient(
@@ -18,3 +17,4 @@ font-family: 'Bungee', sans-serif;
 }
 
 @import "navbar";
+@import "login";
