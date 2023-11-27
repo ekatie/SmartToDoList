@@ -1,5 +1,6 @@
-INSERT INTO categories (name) VALUES ('eat');
-INSERT INTO categories (name) VALUES ('watch');
-INSERT INTO categories (name) VALUES ('read');
-INSERT INTO categories (name) VALUES ('buy');
-INSERT INTO categories (name) VALUES ('do');
+INSERT INTO categories (id, name) VALUES 
+(1, 'eat'),
+(2, 'read'),
+(3, 'watch'),
+(4, 'buy'),
+(5, 'do');
