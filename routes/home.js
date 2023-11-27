@@ -9,11 +9,19 @@ const express = require('express');
 const router = express.Router();
 
 
-// router.get('/', (req, res) => {
-//   // if logged in redirect to /tasks
-//   // if not, redirect to /login
-//   res.render('users');
-// });
+router.get('/', (req, res) => {
+  // if logged in redirect to /tasks
+  // if not, redirect to /login
+
+  const templateVars = {
+    user: {
+    id: req.session.user_id,
+    name: req.session.name,
+    email: req.session.email
+  }}
+
+  res.render('index', templateVars);
+});
 
 router.get('/login', (req, res) => {
   res.render('');
@@ -25,17 +33,20 @@ router.get('/login/:user_id', (req, res) => {
 
   // set cookie
   req.session.user_id = req.params.user_id;
+  const userId = req.session.user_id;
 
-
+const templateVars = {
+  'user_id': userId
+}
   // send the user somewhere (logged in user landing page)
-  res.redirect('/');
+  res.redirect('/', templateVars);
 });
 
 
 // Logout of account
 router.post('/logout', (req, res) => {
   req.session = null;
-  res.redirect('/login');
+  res.redirect('/');
 });
 
 module.exports = router;
