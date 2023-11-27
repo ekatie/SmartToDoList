@@ -1,16 +1,16 @@
-<div class="list-container">
+<div id="error">Error</div>
+<div class="list-container"> 
   <div id="addItem">
   </div>
   <div class="list-header">
     <div class="left-column">
       <p>VIEW:</p>
-<i class="fa-solid fa-list fa-2xl isActive"></i>
-<i class="fa-solid fa-book fa-2xl"></i>
-<i class="fa-solid fa-desktop fa-2xl"></i>
-<i class="fa-solid fa-cart-shopping fa-2xl"></i>
-<i class="fa-solid fa-burger fa-2xl"></i>
-<i class="fa-regular fa-lightbulb fa-2xl"></i>
-      
+      <i class="fa-solid fa-list fa-2xl isActive"></i>
+      <i class="fa-solid fa-book fa-2xl"></i>
+      <i class="fa-solid fa-desktop fa-2xl"></i>
+      <i class="fa-solid fa-cart-shopping fa-2xl"></i>
+      <i class="fa-solid fa-burger fa-2xl"></i>
+      <i class="fa-regular fa-lightbulb fa-2xl"></i>
     </div>
     <div class="right-column">
       <form action="/addItem" method="POST">
@@ -19,7 +19,29 @@
     </form>
   </div>
 </div>
-<div class="list">
-  <h1>LIST</h1>
+<div id="list-container">
+<article>
+  <div class = 'item-container'>
+    <div class = "left-column">
+    <% if("isChecked" === "isChecked"){ %>
+ <i class="fa-regular fa-square-check fa-2xl"></i>
+      <% } else{ %>
+        <i class="fa-regular fa-square fa-2xl"></i>
+        <% } %>
+    <i class="fa-solid fa-book fa-2xl"></i>
+    <p>Eat at Omnom Yummy Eatz</p>
+    </div>
+    <div class = "right-column">
+<div class = "editIcons">
+    <i class="fa-solid fa-exclamation fa-2xl"></i>
+    <i class="fa-solid fa-pen-to-square fa-2xl"></i>
+    <i class="fa-solid fa-trash-can"></i>
+</div>
+<div class = "timestamp">
+<p>Added: October31, 2023 at 12:34 AM</p>
+</div>
+    </div>
+  <div>
+        </article>
 </div>
 </div>
