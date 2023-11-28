@@ -3,7 +3,7 @@ const router = express.Router();
 const database = require("../db/database");
 
 // show all tasks
-router.get('/tasks', (req, res) => {
+router.get('/', (req, res) => {
   // Check if user is logged in, if not then redirect to login page
   const userId = req.session.userId;
   if (!userId) {
