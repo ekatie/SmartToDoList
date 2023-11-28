@@ -29,13 +29,13 @@ const checkForCategoryKeywords = (taskDescription) => {
 
 //Apply code once document is ready
 
-$(document).ready(function () {
+$(document).ready(function() {
   //Hide error element
   $("#error").hide().empty();
 
   // loadList();
 
-  const createListElement = function (task) {
+  const createListElement = function(task) {
     //Create hard coded list items
     const $task = $(`<article>
       <div class="list-container">
@@ -66,7 +66,12 @@ $(document).ready(function () {
   };
 });
 
-$(".list-header i").click(function () {
+$(".list-header i").click(function() {
   $(".list-header i").removeClass("isActive");
   $(this).addClass("isActive");
+});
+
+
+$("#addTaskButton").click(function() {
+  $("#addTask").toggle();
 });
