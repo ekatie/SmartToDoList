@@ -25,6 +25,11 @@
       justify-content: space-evenly;
       flex-direction: row;
       align-items: center;
+    
+    label {
+display: inline-block;
+      min-width: 200px;
+    }
 
       button {
         border-radius: 50%;
@@ -32,6 +37,16 @@
         font-size: 36px;
         padding: 0px;
         font-weight: 100;
+      }
+
+      select {
+        background-color: #73abfa;
+        color: white;
+        padding: 5px;
+        border: 1px solid white;
+        border-radius: 5px;
+        width: 84px;
+        height: 28px;
       }
     }
 

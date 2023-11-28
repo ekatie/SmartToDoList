@@ -33,8 +33,6 @@ $(document).ready(function() {
   //Hide error element
   $("#error").hide().empty();
   $("#addTask").hide();
-  $("#check").hide();
-
 
   const createTaskElement = function(task) {
     //Create hard coded list items
@@ -75,13 +73,5 @@ $(".list-header i").click(function() {
 
 $("#addTaskButton").click(function() {
   $("#addTask").show();
-});
-
-$("#square").click(function() {
-  $("#check").toggle();
-  $("#square").toggle();
-});
-$("#check").click(function() {
-  $("#square").toggle();
-  $("#check").toggle();
+  $("#addTaskButton").hide();
 });

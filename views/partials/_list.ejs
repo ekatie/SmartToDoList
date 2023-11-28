@@ -1,101 +1,95 @@
 <div id="error">Error</div>
 
 <div class="listView-container">
+  <form action="/tasks" method="POST">
+    <div id="addTask">
 
-  <div id="addTask">
-
-    <div class="left-column">
-      <p>I gotta do this thing:</p>
-      <textarea name="text" id="item-text"></textarea>
-    </div>
-
-    <div class="right-column">
-      <div>
-        <p>Due Date</p>
-        <label>High Priority</label>
+      <div class="left-column">
+        <p>I gotta do this thing:</p>
+        <textarea name="text" id="item-text"></textarea>
       </div>
-      <div>
-          <select title = "due_date" name="due_date" id="due_date">
-            <option value="1day">1 day</option>
-            <option value="2days">2 days</option>
-            <option value="3days">3 days</option>
-            <option value="4days">4 days</option>
-          </select>
-         <i class="fa-regular fa-square-check fa-2xl" id = "check"></i>
-          <i class="fa-regular fa-square fa-2xl" id = "square"></i>
-      </div>
-      <div>
-        <form action="/tasks" method="POST">
+      <div class="right-column">
+        <div>
+          <p><label type="date">Due Date</label><select title="due_date" name="due_date" id="due_date">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select></p>
+          <p><label>High Priority</label><input type="checkbox" name="is_priority" />
+          </p>
+        </div>
+        <div>
           <button type="submit">&#43</button>
-        </form>
-      </div>
-    </div>
-  </div>
+        </div>
+  </form>
+</div>
+</div>
 
-  <div class="list-header">
-    <div class="left-column">
-      <p>VIEW:</p>
-      <i class="fa-solid fa-list fa-2xl isActive"></i>
-      <i class="fa-solid fa-book fa-2xl"></i>
-      <i class="fa-solid fa-desktop fa-2xl"></i>
-      <i class="fa-solid fa-cart-shopping fa-2xl"></i>
-      <i class="fa-solid fa-burger fa-2xl"></i>
-      <i class="fa-regular fa-lightbulb fa-2xl"></i>
-    </div>
-    <div class="right-column">
-      <button id="addTaskButton">Add Item &#43</button>
-    </div>
+<div class="list-header">
+  <div class="left-column">
+    <p>VIEW:</p>
+    <i class="fa-solid fa-list fa-2xl isActive"></i>
+    <i class="fa-solid fa-book fa-2xl"></i>
+    <i class="fa-solid fa-desktop fa-2xl"></i>
+    <i class="fa-solid fa-cart-shopping fa-2xl"></i>
+    <i class="fa-solid fa-burger fa-2xl"></i>
+    <i class="fa-regular fa-lightbulb fa-2xl"></i>
   </div>
-  <div id="list-container">
-    <article>
-      <div class="list-container">
-        <div class="left-column">
-          <% if("isChecked"==="isChecked" ){ %>
-            <i class="fa-regular fa-square-check fa-2xl"></i>
-            <% } else{ %>
-              <i class="fa-regular fa-square fa-2xl"></i>
-              <% } %>
-                <i class="fa-solid fa-book fa-2xl"></i>
-                <p>Eat at Omnom Yummy Eatz</p>
+  <div class="right-column">
+    <button id="addTaskButton">Add Item &#43</button>
+  </div>
+</div>
+<div id="list-container">
+  <article>
+    <div class="list-container">
+      <div class="left-column">
+        <% if("isChecked"==="isChecked" ){ %>
+          <i class="fa-regular fa-square-check fa-2xl"></i>
+          <% } else{ %>
+            <i class="fa-regular fa-square fa-2xl"></i>
+            <% } %>
+              <i class="fa-solid fa-book fa-2xl"></i>
+              <p>Eat at Omnom Yummy Eatz</p>
+      </div>
+      <div class="right-column">
+        <div class="editIcons">
+          <% if("error"==="error" ){ %>
+            <i class="fa-solid fa-exclamation fa-2xl"></i>
+            <% } %>
+              <i class="fa-solid fa-pen-to-square fa-2xl"></i>
+              <i class="fa-solid fa-trash-can fa-2xl"></i>
         </div>
-        <div class="right-column">
-          <div class="editIcons">
-            <% if("error"==="error" ){ %>
-              <i class="fa-solid fa-exclamation fa-2xl"></i>
-              <% } %>
-                <i class="fa-solid fa-pen-to-square fa-2xl"></i>
-                <i class="fa-solid fa-trash-can fa-2xl"></i>
-          </div>
-          <div class="timestamp">
-            <p>Added: October31, 2023 at 12:34 AM</p>
-          </div>
+        <div class="timestamp">
+          <p>Added: October31, 2023 at 12:34 AM</p>
         </div>
       </div>
-    </article>
-    <article>
-      <div class="list-container">
-        <div class="left-column">
-          <% if("isChecked"==="isChecked" ){ %>
-            <i class="fa-regular fa-square-check fa-2xl"></i>
-            <% } else{ %>
-              <i class="fa-regular fa-square fa-2xl"></i>
-              <% } %>
-                <i class="fa-solid fa-book fa-2xl"></i>
-                <p>Eat at Omnom Yummy Eatz</p>
+    </div>
+  </article>
+  <article>
+    <div class="list-container">
+      <div class="left-column">
+        <% if("isChecked"==="isChecked" ){ %>
+          <i class="fa-regular fa-square-check fa-2xl"></i>
+          <% } else{ %>
+            <i class="fa-regular fa-square fa-2xl"></i>
+            <% } %>
+              <i class="fa-solid fa-book fa-2xl"></i>
+              <p>Eat at Omnom Yummy Eatz</p>
+      </div>
+      <div class="right-column">
+        <div class="editIcons">
+          <% if("error"==="error" ){ %>
+            <i class="fa-solid fa-exclamation fa-2xl"></i>
+            <% } %>
+              <i class="fa-solid fa-pen-to-square fa-2xl"></i>
+              <i class="fa-solid fa-trash-can fa-2xl"></i>
         </div>
-        <div class="right-column">
-          <div class="editIcons">
-            <% if("error"==="error" ){ %>
-              <i class="fa-solid fa-exclamation fa-2xl"></i>
-              <% } %>
-                <i class="fa-solid fa-pen-to-square fa-2xl"></i>
-                <i class="fa-solid fa-trash-can fa-2xl"></i>
-          </div>
-          <div class="timestamp">
-            <p>Added: October31, 2023 at 12:34 AM</p>
-          </div>
+        <div class="timestamp">
+          <p>Added: October31, 2023 at 12:34 AM</p>
         </div>
       </div>
-    </article>
-  </div>
+    </div>
+  </article>
+</div>
 </div>
