@@ -1,3 +1,5 @@
+const pool = require('./connection');
+
 /**
  * Get a single user from the database given their id.
  * @param {string} id The id of the user.
@@ -5,12 +7,12 @@
  */
 const getUserWithId = function (userId) {
   return pool
-    .query(`SELECT * FROM users WHERE id = $1`, [userId])
+    .query(`SELECT * FROM users WHERE id = $1;`, [userId])
     .then((user) => {
       return user.rows[0] || null;
     })
-    .catch((err) => {
-      return Promise.reject(err);
+    .catch(err => {
+      throw err;
     });
 };
 
