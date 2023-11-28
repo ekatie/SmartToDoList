@@ -1,14 +1,13 @@
 <!-- <header> -->
 <!-- Top nav bar (fixed) -->
 <nav>
-  <div class = "left-column">
+  <div class="left-column">
     <img src="/imgs/logo.png" alt="Lightbulb Logo">
   </div>
-  <span>Smart To Do List</span>
   <!-- If user is logged in, displays logout button -->
-  <% if( undefined !== undefined){ %>
+  <% if(user){ %>
     <form action="/logout" method="POST">
-      <h5 style="width: 300px; margin: 1em" />Logged in as: <%= user["email"] %>
+      <h5 style="margin: 1em" />Logged in as: <%= user.email %>
         </h5>
         <button type="submit">Logout</button>
         </div>
@@ -16,8 +15,8 @@
     <div>
       <!-- If user is not logged in, displays links to the register and login views -->
       <% } else{ %>
-        <div class = "right-column">
-          <p id = "navLoginTxt">Login&nbsp&nbsp&nbsp<button>Sign Up</button></P>
+        <div class="right-column">
+          <p id="navLoginTxt">Login&nbsp&nbsp&nbsp<button>Sign Up</button></P>
         </div>
         <% } %>
     </div>

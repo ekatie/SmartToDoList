@@ -6,6 +6,8 @@ const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
 const cookieSession = require('cookie-session');
+const tasks = require('./routes/tasks.js');
+const home = require('./routes/home.js');
 
 const PORT = process.env.PORT || 8080;
 const app = express();

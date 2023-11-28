@@ -1,0 +1,64 @@
+.loginView {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid 3px white;
+  border-radius: 25%;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+  width: 500px;
+  flex-direction: column;
+  color: white;
+margin-top: 240px;
+
+  #signInHeader {
+    border-bottom: 3px solid white;
+  }
+
+  .loginHeader {
+    width: 90%;
+    padding: 12px;
+    font-size: 1.5rem;
+  }
+
+  #loginForm {
+    border-bottom: 3px solid white;
+    width: 90%;
+  }
+
+  #signUpHeader {
+    margin: 0;
+  }
+
+  #signUpBtn {
+    width: 90%;
+    margin: 0px 0px 36px 0px;
+  }
+
+  input {
+    border: solid 1px white;
+    background-color: #6ca9ff;
+    height: 2.5rem;
+    pointer-events: none;
+    width: 75%;
+  }
+
+  .form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    margin: 12px;
+  }
+
+  #loginBtnContainer {
+    display: flex;
+    justify-content: right;
+    margin-right: 0px;
+  }
+
+  #loginBtn {
+    width: 75%;
+    margin-right: 0px;
+  }
+}

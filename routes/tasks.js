@@ -3,7 +3,7 @@ const router = express.Router();
 const database = require("../db/database");
 
 // show all tasks
-router.get('/tasks', (req, res) => {
+router.get('/', (req, res) => {
   // Check if user is logged in, if not then redirect to login page
   const userId = req.session.userId;
   if (!userId) {
@@ -31,10 +31,9 @@ router.post('/', (req, res) => {
 
   const newTask = req.body;
   newTask.user_id = userId;
-  newTask.created_date = new Date();
 
-  // API
-  // newTask.category_id = api result
+  const creationTimestamp = new Date();
+  newTask.created_date = creationTimestamp.toISOString().slice(0, 19).replace("T", " ");
 
   return database
     .addTask(newTask)
