@@ -33,17 +33,10 @@ $(document).ready(function() {
   //Hide error element
   $("#error").hide().empty();
   $("#addTask").hide();
+  $("#check").hide();
 
-  // loadTasks();
 
-// Fake data taken from initial-tweets.json
-  function loadTasks() {
-    $.ajax("/tasks", { method: "get" })
-      .then((data) => renderTasks(data))
-      .catch((err) => console.log("failed to load tasks: ", err));
-  }
-
-  const createListElement = function(task) {
+  const createTaskElement = function(task) {
     //Create hard coded list items
     const $task = $(`<article>
       <div class="list-container">
@@ -74,15 +67,6 @@ $(document).ready(function() {
   };
 });
 
-//function to render tweets on page
-  const renderTasks = function(tasks) {
-    $("#list-container").empty();
-    for (const tweet of tweets) {
-      const tweetElement = createTaskElement(task);
-      $('#list-container').prepend(taskElement); // to add it to the page so we can make sure it's got all the right elements, classes, etc.
-    }
-  };
-
 $(".list-header i").click(function() {
   $(".list-header i").removeClass("isActive");
   $(this).addClass("isActive");
@@ -90,5 +74,14 @@ $(".list-header i").click(function() {
 
 
 $("#addTaskButton").click(function() {
-  $("#addTask").toggle();
+  $("#addTask").show();
+});
+
+$("#square").click(function() {
+  $("#check").toggle();
+  $("#square").toggle();
+});
+$("#check").click(function() {
+  $("#square").toggle();
+  $("#check").toggle();
 });
