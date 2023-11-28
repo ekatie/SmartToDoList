@@ -34,7 +34,14 @@ $(document).ready(function() {
   $("#error").hide().empty();
   $("#addTask").hide();
 
-  // loadList();
+  // loadTasks();
+
+// Fake data taken from initial-tweets.json
+  function loadTasks() {
+    $.ajax("/tasks", { method: "get" })
+      .then((data) => renderTasks(data))
+      .catch((err) => console.log("failed to load tasks: ", err));
+  }
 
   const createListElement = function(task) {
     //Create hard coded list items
@@ -66,6 +73,15 @@ $(document).ready(function() {
     return $task;
   };
 });
+
+//function to render tweets on page
+  const renderTasks = function(tasks) {
+    $("#list-container").empty();
+    for (const tweet of tweets) {
+      const tweetElement = createTaskElement(task);
+      $('#list-container').prepend(taskElement); // to add it to the page so we can make sure it's got all the right elements, classes, etc.
+    }
+  };
 
 $(".list-header i").click(function() {
   $(".list-header i").removeClass("isActive");
