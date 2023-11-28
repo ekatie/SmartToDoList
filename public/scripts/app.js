@@ -33,7 +33,7 @@ $(document).ready(function () {
   //Hide error element
   $("#error").hide().empty();
 
-  loadList();
+  // loadList();
 
   const createListElement = function (task) {
     //Create hard coded list items
