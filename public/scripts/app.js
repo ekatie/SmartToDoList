@@ -32,6 +32,7 @@ const checkForCategoryKeywords = (taskDescription) => {
 $(document).ready(function() {
   //Hide error element
   $("#error").hide().empty();
+  $("#addTask").hide();
 
   // loadList();
 
