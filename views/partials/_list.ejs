@@ -1,17 +1,17 @@
 <div id="error">Error</div>
 
 <div class="listView-container">
-  <form action="/tasks" method="POST">
+  <form id="new-task" action="/tasks" method="POST">
     <div id="addTask">
 
       <div class="left-column">
         <p>I gotta do this thing:</p>
-        <textarea name="text" id="item-text"></textarea>
+        <textarea name="text" id="task-text"></textarea>
       </div>
 
       <div class="right-column">
         <div>
-          <p><label type="date">Due Date</label><input type ="date" name = "due_date" id = "date_selector"/></p>
+          <p><label type="date">Due Date</label><input type="date" name="due_date" id="date_selector" /></p>
           <p><label>High Priority</label><input type="checkbox" name="is_priority" />
           </p>
         </div>
@@ -49,15 +49,23 @@
               <p>Eat at Omnom Yummy Eatz</p>
       </div>
       <div class="right-column">
+
         <div class="editIcons">
-          <% if("error"==="error" ){ %>
-            <i class="fa-solid fa-exclamation fa-2xl"></i>
+          <% if("due_date"==="due_date" ){ %>
+            <p>Due: November 30, 2023</p>
             <% } %>
-              <i class="fa-solid fa-pen-to-square fa-2xl"></i>
-              <i class="fa-solid fa-trash-can fa-2xl"></i>
+              <% if("error"==="error" ){ %>
+                <i class="fa-solid fa-exclamation fa-2xl"></i>
+                <% } %>
+                  <i class="fa-solid fa-pen-to-square fa-2xl"></i>
+                  <i class="fa-solid fa-trash-can fa-2xl"></i>
         </div>
         <div class="timestamp">
-          <p>Added: October31, 2023 at 12:34 AM</p>
+          <% if("completed_date"==="completed_date" ){ %>
+            <p>Added: October 31, 2023 at 12:34 AM</p>
+            <% } else{ %>
+              <p>Completed: November 30, 2023 at 12:34 AM</p>
+              <% } %>
         </div>
       </div>
     </div>
@@ -74,15 +82,23 @@
               <p>Eat at Omnom Yummy Eatz</p>
       </div>
       <div class="right-column">
+
         <div class="editIcons">
-          <% if("error"==="error" ){ %>
-            <i class="fa-solid fa-exclamation fa-2xl"></i>
+          <% if("due_date"!=="due_date" ){ %>
+            <p>Due: November 30, 2023</p>
             <% } %>
-              <i class="fa-solid fa-pen-to-square fa-2xl"></i>
-              <i class="fa-solid fa-trash-can fa-2xl"></i>
+              <% if("error"==="error" ){ %>
+                <i class="fa-solid fa-exclamation fa-2xl"></i>
+                <% } %>
+                  <i class="fa-solid fa-pen-to-square fa-2xl"></i>
+                  <i class="fa-solid fa-trash-can fa-2xl"></i>
         </div>
         <div class="timestamp">
-          <p>Added: October31, 2023 at 12:34 AM</p>
+          <% if("completed_date"!=="completed_date" ){ %>
+            <p>Added: October 31, 2023 at 12:34 AM</p>
+            <% } else{ %>
+              <p>Completed: November 30, 2023 at 12:34 AM</p>
+              <% } %>
         </div>
       </div>
     </div>
