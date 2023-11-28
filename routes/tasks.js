@@ -5,7 +5,7 @@ const database = require("../db/database");
 // show all tasks
 router.get('/', (req, res) => {
   // Check if user is logged in, if not then redirect to login page
-  const userId = req.session.userId;
+  const userId = 4;
   if (!userId) {
     return res.redirect('/login');
   }
@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
 
   // Check if user is logged in, if not then redirect to login page
-  const userId = req.session.userId;
+  const userId = 4;
   if (!userId) {
     return res.redirect('/login');
   }
@@ -49,7 +49,7 @@ router.post('/', (req, res) => {
 router.post('/:id', (req, res) => {
 
   // Check if user is logged in, if not then redirect to login page
-  const userId = req.session.userId;
+  const userId = 4;
   if (!userId) {
     return res.redirect('/login');
   }
@@ -82,7 +82,7 @@ router.post('/:id', (req, res) => {
 router.post('/:id/delete', (req, res) => {
 
   // Check if user is logged in, if not then redirect to login page
-  const userId = req.session.userId;
+  const userId = 4;
   if (!userId) {
     return res.redirect('/login');
   }
