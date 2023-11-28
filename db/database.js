@@ -29,7 +29,10 @@ const getUserTasks = function (userId) {
   JOIN users ON tasks.user_id = users.id 
   JOIN categories ON tasks.category_id = categories.id 
   WHERE user_id = $1 
-  ORDER BY is_priority DESC, created_date DESC;`;
+  ORDER BY 
+    CASE WHEN completed_date IS NULL THEN 1 ELSE 0 END, 
+    CASE WHEN is_priority THEN 1 ELSE 0 END,
+    created_date;`;
 
   return pool
     .query(query, [userId])
