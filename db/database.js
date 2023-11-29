@@ -67,15 +67,16 @@ const getUserWithId = function (userId) {
  */
 const getUserTasks = function (userId) {
   const query = `
-  SELECT tasks.*
-  FROM tasks
-  JOIN users ON tasks.user_id = users.id
-  JOIN categories ON tasks.category_id = categories.id
-  WHERE user_id = $1
-  ORDER BY
-    CASE WHEN completed_date IS NULL THEN 1 ELSE 0 END,
-    CASE WHEN is_priority THEN 1 ELSE 0 END,
-    created_date;`;
+  SELECT tasks.* 
+  FROM tasks 
+  JOIN users ON tasks.user_id = users.id 
+  JOIN categories ON tasks.category_id = categories.id 
+  WHERE user_id = $1 
+  ORDER BY 
+    CASE WHEN is_complete THEN 0 ELSE 1 END, 
+    CASE WHEN is_priority THEN 1 ELSE 0 END, 
+    completed_date DESC NULLS LAST, 
+    created_date ASC;`;
 
   return pool.query(query, [userId]).then((result) => {
     return result.rows;
@@ -146,12 +147,14 @@ const editTaskCategory = function (taskId, taskCategoryId) {
  * @return {Promise<{}>} A promise to the task status.
  */
 const updateTaskStatus = function (taskId, isComplete) {
+  isComplete = isComplete === 'true';
+
   const query = `
-    UPDATE tasks
-    SET
-      is_complete = $1,
-      completed_date = ${isComplete ? "NOW()" : "null"}
-    WHERE task.id = $2
+    UPDATE tasks 
+    SET 
+      is_complete = $1, 
+      completed_date = ${isComplete ? "NOW()" : "null"} 
+    WHERE tasks.id = $2 
     RETURNING *;`;
 
   const values = [isComplete, taskId];
