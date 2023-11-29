@@ -98,7 +98,6 @@ const createTaskElement = function (taskData) {
       <form action="/tasks" method="POST">
      <input type="checkbox" name="is_priority" class = "checkbox" />
     </form>
-      ${taskData.is_complete ? '<i class="fa-regular fa-square-check fa-2xl"></i>' : '<i class="fa-regular fa-square fa-2xl"></i>'}
       ${icon}
       <p>${taskData.description}</p>
     </div>
