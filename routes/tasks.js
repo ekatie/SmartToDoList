@@ -55,7 +55,7 @@ router.post('/:id', (req, res) => {
   }
 
   const task = req.body;
-  newTask.user_id = userId;
+  task.user_id = userId;
 
   // Call function based on what column value was edited - category or is_complete status
   if (task.category) {
