@@ -1,4 +1,45 @@
-const pool = require('./connection');
+const pool = require("./connection");
+import OpenAI from "openai";
+//uses the chatGPT API key
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+
+/**
+ *
+ * @param {string} userInput takes the task.description of the user
+ * @return {string} returns the answer of chatGPT API based on the userInput
+ */
+async function getCategoryFromAPI(userInput) {
+  const completion = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo-1106",
+    messages: [
+      {
+        role: "system",
+        content:
+          "You are a smart to-do list that categorizes user input with only one of the following: eat, watch, read, buy, do",
+      },
+      { role: "user", content: `${userInput}` },
+    ],
+    //temperature controls randomness: Lowering results in less random completions. As temperature approaches 0, the model will become deterministic and repetitive.
+    temperature: 1,
+
+    //The maximum number of token to generate shared between the prompt and completion. The exact limit varies by model (One token is roughly 4 characters for standard English Text)
+    max_tokens: 256,
+
+    //Controls diversity via nucleus sampling: 0.5 means half of all likelihood-weighted options are considered
+    top_p: 1,
+
+    //How much to penalize new tokens based on their existing frequency in the text so far. Decreases the model's likelihood to repeat the same line verbatim
+    frequency_penalty: 0,
+
+    //How much to penalize new tokens based on  whether they appear in the text so far. Increase the model's likelihood to talk about new topics
+    presence_penalty: 0,
+    response_format: { type: "json_object" },
+  });
+
+  return completion.choices[0].message.content;
+}
 
 /**
  * Get a single user from the database given their id.
@@ -11,7 +52,7 @@ const getUserWithId = function (userId) {
     .then((user) => {
       return user.rows[0] || null;
     })
-    .catch(err => {
+    .catch((err) => {
       throw err;
     });
 };
@@ -22,20 +63,17 @@ const getUserWithId = function (userId) {
  * @return {Promise<[{}]>} A promise to return the tasks.
  */
 const getUserTasks = function (userId) {
-
   const query = `
-  SELECT tasks.* 
-  FROM tasks 
-  JOIN users ON tasks.user_id = users.id 
-  JOIN categories ON tasks.category_id = categories.id 
-  WHERE user_id = $1 
+  SELECT tasks.*
+  FROM tasks
+  JOIN users ON tasks.user_id = users.id
+  JOIN categories ON tasks.category_id = categories.id
+  WHERE user_id = $1
   ORDER BY is_priority DESC, created_date DESC;`;
 
-  return pool
-    .query(query, [userId])
-    .then((result) => {
-      return result.rows;
-    });
+  return pool.query(query, [userId]).then((result) => {
+    return result.rows;
+  });
 };
 
 /**
@@ -44,25 +82,30 @@ const getUserTasks = function (userId) {
  * @return {Promise<{}>} A promise to the task.
  */
 const addTask = function (task) {
-
   // Determine task category
   task.category_id = checkForCategoryKeywords(newTask.description);
 
   if (!task.category_id) {
-    // API call
+    // API call --> getCategoryFromAPI(task.description)
   }
 
   const query = `
-INSERT INTO tasks (user_id, category_id, description, is_complete, created_date, is_priority, due_date) 
+INSERT INTO tasks (user_id, category_id, description, is_complete, created_date, is_priority, due_date)
 VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`;
 
-  const values = [task.user_id, task.category_id, task.description, task.is_complete, task.created_date, task.is_priority, task.due_date];
+  const values = [
+    task.user_id,
+    task.category_id,
+    task.description,
+    task.is_complete,
+    task.created_date,
+    task.is_priority,
+    task.due_date,
+  ];
 
-  return pool
-    .query(query, values)
-    .then((newTask) => {
-      return newTask;
-    });
+  return pool.query(query, values).then((newTask) => {
+    return newTask;
+  });
 };
 
 /**
@@ -72,20 +115,16 @@ VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`;
  * @return {Promise<{}>} A promise to the task category.
  */
 const editTaskCategory = function (taskId, taskCategoryId) {
-
   const query = `
-  UPDATE tasks 
-  SET category_id = $1 
+  UPDATE tasks
+  SET category_id = $1
   WHERE task.id = $2 RETURNING *;`;
 
   const values = [taskCategoryId, taskId];
 
-  return pool
-    .query(query, values)
-    .then((editedTask) => {
-      return editedTask;
-    });
-
+  return pool.query(query, values).then((editedTask) => {
+    return editedTask;
+  });
 };
 
 /**
@@ -95,23 +134,19 @@ const editTaskCategory = function (taskId, taskCategoryId) {
  * @return {Promise<{}>} A promise to the task status.
  */
 const updateTaskStatus = function (taskId, isComplete) {
-
   const query = `
-    UPDATE tasks 
-    SET 
-      is_complete = $1, 
-      completed_date = ${isComplete ? 'NOW()' : 'null'} 
-    WHERE task.id = $2 
+    UPDATE tasks
+    SET
+      is_complete = $1,
+      completed_date = ${isComplete ? "NOW()" : "null"}
+    WHERE task.id = $2
     RETURNING *;`;
 
   const values = [isComplete, taskId];
 
-  return pool
-    .query(query, values)
-    .then((editedTask) => {
-      return editedTask;
-    });
-
+  return pool.query(query, values).then((editedTask) => {
+    return editedTask;
+  });
 };
 
 /**
@@ -120,19 +155,15 @@ const updateTaskStatus = function (taskId, isComplete) {
  * @return {Promise<{}>} A promise to the task.
  */
 const deleteTask = function (taskId) {
-
   const query = `
-  DELETE FROM tasks 
+  DELETE FROM tasks
   WHERE task.id = $1;`;
 
   const values = [taskId];
 
-  return pool
-    .query(query, values)
-    .then((deletedTask) => {
-      return deletedTask;
-    });
-
+  return pool.query(query, values).then((deletedTask) => {
+    return deletedTask;
+  });
 };
 
 module.exports = {
@@ -141,5 +172,5 @@ module.exports = {
   addTask,
   editTaskCategory,
   updateTaskStatus,
-  deleteTask
+  deleteTask,
 };
