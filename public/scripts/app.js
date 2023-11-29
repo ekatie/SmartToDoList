@@ -47,7 +47,7 @@ const onSubmit = function(event) {
 
   // Clear text input field, remove errors
   $('#new-task')[0].reset();
-  $('.error').slideUp();
+  $('.#error').slideUp();
 
   $.post('/tasks', taskData)
     .then(() => {
@@ -109,13 +109,12 @@ const createTaskElement = function (taskData) {
       <i class="fa-solid fa-trash-can fa-2xl"></i>
       </div>
       <div class="timestamp">
-      ${!taskData.completed_date ? <p>Added: ${new Intl.DateTimeFormat('en-US', options).format(createdDate)}</p> : <p>Completed: ${new Intl.DateTimeFormat('en-US', options).format(completedDate)}</p>}
+      ${!taskData.completed_date ? `<p>Added: ${new Intl.DateTimeFormat('en-US', options).format(createdDate)}</p>` : `<p>Completed: ${new Intl.DateTimeFormat('en-US', options).format(completedDate)}</p>`}
       </div>
     </div>
   </div>
   </article>
   `;
-  console.log($task);
   return $task;
 };
 
