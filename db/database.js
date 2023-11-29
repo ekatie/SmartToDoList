@@ -12,6 +12,7 @@ const openai = new OpenAI({
  * @return {string} returns the answer of chatGPT API based on the userInput
  */
 async function getCategoryFromAPI(userInput) {
+
   const completion = await openai.chat.completions.create({
     model: "gpt-3.5-turbo-1106",
     messages: [
@@ -21,12 +22,13 @@ async function getCategoryFromAPI(userInput) {
           "You are a smart to-do list that categorizes user input with only one of the following: eat, watch, read, buy, do",
       },
       { role: "user", content: `${userInput}` },
+
     ],
     //temperature controls randomness: Lowering results in less random completions. As temperature approaches 0, the model will become deterministic and repetitive.
     temperature: 1,
 
     //The maximum number of token to generate shared between the prompt and completion. The exact limit varies by model (One token is roughly 4 characters for standard English Text)
-    max_tokens: 256,
+    max_tokens: 2,
 
     //Controls diversity via nucleus sampling: 0.5 means half of all likelihood-weighted options are considered
     top_p: 1,
@@ -36,7 +38,7 @@ async function getCategoryFromAPI(userInput) {
 
     //How much to penalize new tokens based on  whether they appear in the text so far. Increase the model's likelihood to talk about new topics
     presence_penalty: 0,
-    response_format: { type: "json_object" },
+    response_format: { type: "text" },
   });
 
   return completion.choices[0].message.content;
@@ -85,7 +87,7 @@ const getUserTasks = function (userId) {
  * @param {{}} task An object containing all of the task details.
  * @return {Promise<{}>} A promise to the task.
  */
-const addTask = function (task) {
+const addTask = async function (task) {
   // Set due date to null if empty
   task.due_date = task.due_date === "" ? null : task.due_date;
 
@@ -93,8 +95,12 @@ const addTask = function (task) {
   task.category_id = checkForCategoryKeywords(task.description);
 
   if (!task.category_id) {
-    // API call --> getCategoryFromAPI(task.description)
-    categories.name = getCategoryFromAPI(task.description);
+    try {
+      const category_name = await getCategoryFromAPI(task.description);
+      task.category_id = checkForCategoryKeywords(category_name) ? checkForCategoryKeywords(category_name) : 5;
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   const query = `
