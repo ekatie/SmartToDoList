@@ -1,4 +1,3 @@
-const pool = require('./connection');
 const checkForCategoryKeywords = require('../public/scripts/helper');
 const pool = require("./connection");
 import OpenAI from "openai";
