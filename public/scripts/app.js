@@ -1,32 +1,3 @@
-// Client facing scripts here
-
-/**
- * This functions searches for keywords in the task description to see if the category can be determined.
- * @param {string} taskDescription 
- * @returns A string containing the task category, if found, or undefined, if not.
- */
-const checkForCategoryKeywords = (taskDescription) => {
-  const keywordMapping = {
-    1: ['eat', 'dine', 'food', 'take-out', 'cook', 'restaurant', 'meal'],
-    2: ['watch', 'movie', 'tv show', 'episode', 'stream', 'series', 'film'],
-    3: ['read', 'author', 'book', 'novel', 'literature', 'textbook'],
-    4: ['buy', 'shop', 'purchase', 'order']
-  };
-
-  for (const categoryId in keywordMapping) {
-    const keywords = keywordMapping[categoryID];
-
-    for (const keyword of keywords) {
-      if (taskDescription.toLowerCase().includes(keyword)) {
-        return Number(categoryId);
-      }
-    }
-  }
-
-  return undefined;
-};
-
-
 //Apply code once document is ready
 $(document).ready(function () {
   //Hide error element
@@ -94,24 +65,43 @@ const onSubmit = function (event) {
 * @returns - Task element
 */
 const createTaskElement = function (taskData) {
-  // const taskContent = escape(taskData.content.text);
 
   const createdDate = new Date(taskData.created_date);
   const completedDate = new Date(taskData.completed_date);
 
   const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+  const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+
+  let icon;
+  switch (taskData.category_id) {
+    case 1:
+      icon = '<i class="fa-solid fa-burger fa-2xl"></i>';
+      break;
+    case 2:
+      icon = '<i class="fa-solid fa-book fa-2xl"></i>';
+      break;
+    case 3:
+      icon = `<i class="fa-solid fa-desktop fa-2xl"></i>`;
+      break;
+    case 4:
+      icon = `<i class="fa-solid fa-cart-shopping fa-2xl"></i>`;
+      break;
+    case 5:
+      icon = `<i class="fa-regular fa-lightbulb fa-2xl"></i>`;
+      break;
+  }
 
   const $task = `
   <article>
   <div class="list-container">
     <div class="left-column">
       ${taskData.is_complete ? '<i class="fa-regular fa-square-check fa-2xl"></i>' : '<i class="fa-regular fa-square fa-2xl"></i>'}
-      <i class="fa-solid fa-book fa-2xl"></i>
+      ${icon}
       <p>${taskData.description}</p>
     </div>
     <div class="right-column">
       <div class="editIcons">
-      ${taskData.due_date === "due_date" ? `<p>Due: ${taskData.due_date}</p>` : ''}
+      ${taskData.due_date ? `<p>Due: ${new Intl.DateTimeFormat('en-US', dateOptions).format(new Date(taskData.due_date))}</p>` : ''}
       ${taskData.is_priority ? '<i class="fa-solid fa-exclamation fa-2xl"></i>' : ''}
       <i class="fa-solid fa-pen-to-square fa-2xl"></i>
       <i class="fa-solid fa-trash-can fa-2xl"></i>
@@ -123,6 +113,7 @@ const createTaskElement = function (taskData) {
   </div>
   </article>
   `;
+  console.log($task);
   return $task;
 };
 
