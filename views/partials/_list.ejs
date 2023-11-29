@@ -11,9 +11,8 @@
 
       <div class="right-column">
         <div>
-          <p><label type="date">Due Date</label><input type="date" name="due_date" id="date_selector" /></p>
-          <p><label>High Priority</label><input type="checkbox" name="is_priority" />
-          </p>
+          <p><label for ="due_date" type="date">Due Date</label><input type="date" name="due_date" id="due_date" /></p>
+          <p><label for ="is_priority">High Priority</label><input type="checkbox" name="is_priority" id = "is_priority" /></p>
         </div>
         <div>
           <button type="submit">&#43</button>
@@ -37,71 +36,5 @@
   </div>
 </div>
 <div id="list-container">
-  <article>
-    <div class="list-container">
-      <div class="left-column">
-        <% if("isChecked"==="isChecked" ){ %>
-          <i class="fa-regular fa-square-check fa-2xl"></i>
-          <% } else{ %>
-            <i class="fa-regular fa-square fa-2xl"></i>
-            <% } %>
-              <i class="fa-solid fa-book fa-2xl"></i>
-              <p>Eat at Omnom Yummy Eatz</p>
-      </div>
-      <div class="right-column">
-
-        <div class="editIcons">
-          <% if("due_date"==="due_date" ){ %>
-            <p>Due: November 30, 2023</p>
-            <% } %>
-              <% if("error"==="error" ){ %>
-                <i class="fa-solid fa-exclamation fa-2xl"></i>
-                <% } %>
-                  <i class="fa-solid fa-pen-to-square fa-2xl"></i>
-                  <i class="fa-solid fa-trash-can fa-2xl"></i>
-        </div>
-        <div class="timestamp">
-          <% if("completed_date"==="completed_date" ){ %>
-            <p>Added: October 31, 2023 at 12:34 AM</p>
-            <% } else{ %>
-              <p>Completed: November 30, 2023 at 12:34 AM</p>
-              <% } %>
-        </div>
-      </div>
-    </div>
-  </article>
-  <article>
-    <div class="list-container">
-      <div class="left-column">
-        <% if("isChecked"==="isChecked" ){ %>
-          <i class="fa-regular fa-square-check fa-2xl"></i>
-          <% } else{ %>
-            <i class="fa-regular fa-square fa-2xl"></i>
-            <% } %>
-              <i class="fa-solid fa-book fa-2xl"></i>
-              <p>Eat at Omnom Yummy Eatz</p>
-      </div>
-      <div class="right-column">
-
-        <div class="editIcons">
-          <% if("due_date"!=="due_date" ){ %>
-            <p>Due: November 30, 2023</p>
-            <% } %>
-              <% if("error"==="error" ){ %>
-                <i class="fa-solid fa-exclamation fa-2xl"></i>
-                <% } %>
-                  <i class="fa-solid fa-pen-to-square fa-2xl"></i>
-                  <i class="fa-solid fa-trash-can fa-2xl"></i>
-        </div>
-        <div class="timestamp">
-          <% if("completed_date"!=="completed_date" ){ %>
-            <p>Added: October 31, 2023 at 12:34 AM</p>
-            <% } else{ %>
-              <p>Completed: November 30, 2023 at 12:34 AM</p>
-              <% } %>
-        </div>
-      </div>
-    </div>
-  </article>
 </div>
 </div>
