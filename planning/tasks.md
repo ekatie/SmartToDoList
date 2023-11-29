@@ -23,7 +23,7 @@
   - API integration (Peter)
     - Connect with external API (**Chat GPT, Google, Wolfram Alpha, IMDB, Amazon, Yelp).
     - Retrieve information for auto-categorization.
-- Routes / DB (Katie)
+- Routes / DB (Katie)t
  - Browse tasks
  - Read details about task
  - Edit task category/status
