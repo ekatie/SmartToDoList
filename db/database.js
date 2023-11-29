@@ -1,7 +1,6 @@
-const pool = require('./connection');
-const checkForCategoryKeywords = require('../public/scripts/helper');
 const pool = require("./connection");
-import OpenAI from "openai";
+const checkForCategoryKeywords = require("../public/scripts/helper");
+const OpenAI = require("openai");
 //uses the chatGPT API key
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -87,28 +86,34 @@ const getUserTasks = function (userId) {
  * @return {Promise<{}>} A promise to the task.
  */
 const addTask = function (task) {
-
   // Set due date to null if empty
-  task.due_date = task.due_date === '' ? null : task.due_date;
+  task.due_date = task.due_date === "" ? null : task.due_date;
 
   // Determine task category
   task.category_id = checkForCategoryKeywords(task.description);
 
   if (!task.category_id) {
     // API call --> getCategoryFromAPI(task.description)
+    categories.name = getCategoryFromAPI(task.description);
   }
 
   const query = `
 INSERT INTO tasks (user_id, category_id, description, is_complete, created_date, is_priority, due_date)
 VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`;
 
-  const values = [task.user_id, task.category_id, task.description, task.is_complete, task.created_date, task.is_priority, task.due_date];
+  const values = [
+    task.user_id,
+    task.category_id,
+    task.description,
+    task.is_complete,
+    task.created_date,
+    task.is_priority,
+    task.due_date,
+  ];
 
-  return pool
-    .query(query, values)
-    .then((task) => {
-      return task;
-    });
+  return pool.query(query, values).then((task) => {
+    return task;
+  });
 };
 
 /**
