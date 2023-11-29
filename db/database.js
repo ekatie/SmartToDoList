@@ -7,7 +7,7 @@ const openai = new OpenAI({
 });
 
 /**
- *
+ * Uses chatGPT API which takes in the task description of the user and     categorizes it accordingly into one of the following 5 categories: eat, watch, read, buy, do.
  * @param {string} userInput takes the task.description of the user
  * @return {string} returns the answer of chatGPT API based on the userInput
  */
@@ -26,7 +26,7 @@ async function getCategoryFromAPI(userInput) {
     temperature: 1,
 
     //The maximum number of token to generate shared between the prompt and completion. The exact limit varies by model (One token is roughly 4 characters for standard English Text)
-    max_tokens: 256,
+    max_tokens: 2,
 
     //Controls diversity via nucleus sampling: 0.5 means half of all likelihood-weighted options are considered
     top_p: 1,
@@ -36,7 +36,7 @@ async function getCategoryFromAPI(userInput) {
 
     //How much to penalize new tokens based on  whether they appear in the text so far. Increase the model's likelihood to talk about new topics
     presence_penalty: 0,
-    response_format: { type: "json_object" },
+    response_format: { type: "text" },
   });
 
   return completion.choices[0].message.content;
@@ -93,8 +93,7 @@ const addTask = function (task) {
   task.category_id = checkForCategoryKeywords(task.description);
 
   if (!task.category_id) {
-    // API call --> getCategoryFromAPI(task.description)
-    categories.name = getCategoryFromAPI(task.description);
+    //API call
   }
 
   const query = `
