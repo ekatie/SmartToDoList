@@ -1,4 +1,5 @@
 const pool = require('./connection');
+const checkForCategoryKeywords = require('../public/scripts/helper');
 
 /**
  * Get a single user from the database given their id.
@@ -48,8 +49,11 @@ const getUserTasks = function (userId) {
  */
 const addTask = function (task) {
 
+  // Set due date to null if empty
+  task.due_date = task.due_date === '' ? null : task.due_date;
+
   // Determine task category
-  task.category_id = checkForCategoryKeywords(newTask.description);
+  task.category_id = checkForCategoryKeywords(task.description);
 
   if (!task.category_id) {
     // API call
@@ -63,8 +67,8 @@ VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`;
 
   return pool
     .query(query, values)
-    .then((newTask) => {
-      return newTask;
+    .then((task) => {
+      return task;
     });
 };
 
