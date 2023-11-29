@@ -1,5 +1,6 @@
 //Apply code once document is ready
 $(document).ready(function () {
+
   //Hide error element
   $("#error").hide().empty();
   $("#addTask").hide();
@@ -19,14 +20,18 @@ $(document).ready(function () {
     onSubmit(event);
   });
 
-  // Task marked as complete
-  $('#checkbox').on('change', function (event) {
-    taskData.is_complete = this.checked;
-  });
-
   loadTasks();
 });
 
+// Task marked as complete
+$(document).on('change', '#complete-checkbox', function (event) {
+
+  const taskId = $(this).data('task-id');
+  const isComplete = this.checked;
+
+  updateTaskStatusOnServer(taskId, isComplete);
+
+});
 
 /**
  * This function handles form submission for new tasks. After successfully posting a new task, it loads the updated tasks.
@@ -72,7 +77,10 @@ const onSubmit = function (event) {
 const createTaskElement = function (taskData) {
 
   const createdDate = new Date(taskData.created_date);
-  const completedDate = new Date(taskData.completed_date);
+
+  if (taskData.completed_date) {
+    completedDate = new Date(taskData.completed_date);
+  }
 
   const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -101,7 +109,7 @@ const createTaskElement = function (taskData) {
   <div class="list-container">
     <div class="left-column">
       <form action="/tasks/:id" method="POST">
-      <input type="checkbox" name="is_complete" class="checkbox" ${taskData.is_complete ? 'checked' : ''} />
+      <input type="checkbox" name="is_complete" data-task-id="${taskData.id}" id ="complete-checkbox" class="checkbox" ${taskData.is_complete ? 'checked' : ''} />
     </form>
       ${icon}
       <p>${taskData.description}</p>
@@ -147,5 +155,20 @@ const loadTasks = function () {
     .fail((error) => {
       $('#error').text('Oops! An error occurred while loading tasks.');
       $('#error').slideDown();
+    });
+};
+
+const updateTaskStatusOnServer = function (taskId, isComplete) {
+  const data = {
+    id: taskId,
+    is_complete: isComplete
+  };
+
+  $.post(`/tasks/${taskId}`, data)
+    .then(() => {
+      loadTasks();
+    })
+    .catch((error) => {
+      console.error('Error updating task status:', error);
     });
 };
