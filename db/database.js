@@ -85,15 +85,18 @@ const getUserTasks = function (userId) {
  * @param {{}} task An object containing all of the task details.
  * @return {Promise<{}>} A promise to the task.
  */
-const addTask = function (task) {
-  // Set due date to null if empty
+const addTask = async function (task) {
   task.due_date = task.due_date === "" ? null : task.due_date;
 
-  // Determine task category
   task.category_id = checkForCategoryKeywords(task.description);
 
   if (!task.category_id) {
-    //API call
+    try {
+      const category_name = await getCategoryFromAPI(task.description);
+      task.category_id = checkForCategoryKeywords(category_name) ? checkForCategoryKeywords(category_name) : 5;
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   const query = `
