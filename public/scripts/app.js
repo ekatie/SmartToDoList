@@ -19,6 +19,11 @@ $(document).ready(function () {
     onSubmit(event);
   });
 
+  // Task marked as complete
+  $('#checkbox').on('change', function (event) {
+    taskData.is_complete = this.checked;
+  });
+
   loadTasks();
 });
 
@@ -105,7 +110,6 @@ const createTaskElement = function (taskData) {
       <div class="editIcons">
       ${taskData.due_date ? `<p>Due: ${new Intl.DateTimeFormat('en-US', dateOptions).format(new Date(taskData.due_date))}</p>` : ''}
       ${taskData.is_priority ? '<i class="fa-solid fa-exclamation fa-2xl"></i>' : ''}
-      <i class="fa-solid fa-pen-to-square fa-2xl"></i>
       <i class="fa-solid fa-trash-can fa-2xl"></i>
       </div>
       <div class="timestamp">

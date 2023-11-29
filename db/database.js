@@ -12,6 +12,7 @@ const openai = new OpenAI({
  * @return {string} returns the answer of chatGPT API based on the userInput
  */
 async function getCategoryFromAPI(userInput) {
+
   const completion = await openai.chat.completions.create({
     model: "gpt-3.5-turbo-1106",
     messages: [
@@ -21,6 +22,7 @@ async function getCategoryFromAPI(userInput) {
           "You are a smart to-do list that categorizes user input with only one of the following: eat, watch, read, buy, do",
       },
       { role: "user", content: `${userInput}` },
+
     ],
     //temperature controls randomness: Lowering results in less random completions. As temperature approaches 0, the model will become deterministic and repetitive.
     temperature: 1,

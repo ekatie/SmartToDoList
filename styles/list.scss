@@ -31,7 +31,7 @@
         min-width: 200px;
       }
 
-      button  {
+      button {
         border-radius: 50%;
         width: 50px;
         font-size: 36px;
@@ -97,10 +97,10 @@
     .right-column {
       justify-content: right;
 
-button {
-margin: 0;
-padding: 0 3em;
-  }
+      button {
+        margin: 0;
+        padding: 0 3em;
+      }
     }
   }
 }
@@ -163,4 +163,10 @@ padding: 0 3em;
   p {
     margin-left: 12px;
   }
+}
+
+.left-column i:hover,
+.right-column .fa-trash-can:hover {
+  cursor: pointer;
+  color: rgb(96, 93, 255);
 }

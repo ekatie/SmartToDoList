@@ -6,10 +6,9 @@ html {
 }
 
 button {
-  border: none;
+  border: solid 1.5px white;
   color: white;
   background-color: #0899ff;
-  border-color: white;
   border-radius: 10px;
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
@@ -17,6 +16,11 @@ button {
   margin: 10px;
 }
 
+button:hover {
+  cursor: pointer;
+  background-color: #605dff;
+  ;
+}
 
 //  @media screen and (min-width: 992px) {
 //     nav {
