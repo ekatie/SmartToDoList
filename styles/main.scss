@@ -4,12 +4,23 @@ body {
   justify-content: center;
   align-items: center;
   background: #73abfa;
-  font-family: 'Bungee', sans-serif;
+  font-family: sans-serif;
 
   input[type=checkbox] {
     line-height: normal;
     width: 20px;
     height: 20px;
+  }
+
+  #error {
+    color: red;
+    border: solid 3px red;
+    margin: 1em auto;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 1em;
+    border-radius: 15px;
   }
 }
 
