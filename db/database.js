@@ -36,7 +36,7 @@ async function getCategoryFromAPI(userInput) {
 
     //How much to penalize new tokens based on  whether they appear in the text so far. Increase the model's likelihood to talk about new topics
     presence_penalty: 0,
-    response_format: { type: "json_object" },
+    response_format: { type: "text" },
   });
 
   return completion.choices[0].message.content;
@@ -93,8 +93,10 @@ const addTask = function (task) {
   task.category_id = checkForCategoryKeywords(task.description);
 
   if (!task.category_id) {
-    // API call --> getCategoryFromAPI(task.description)
-    categories.name = getCategoryFromAPI(task.description);
+    const category_name = getCategoryFromAPI(task.description);
+    return checkForCategoryKeywords(category_name)
+      ? checkForCategoryKeywords(category_name)
+      : 5;
   }
 
   const query = `
