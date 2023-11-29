@@ -19,6 +19,11 @@ $(document).ready(function () {
     onSubmit(event);
   });
 
+  // Task marked as complete
+  $('#checkbox').on('change', function (event) {
+    taskData.is_complete = this.checked;
+  });
+
   loadTasks();
 });
 
@@ -47,7 +52,7 @@ const onSubmit = function (event) {
 
   // Clear text input field, remove errors
   $('#new-task')[0].reset();
-  $('.error').slideUp();
+  $('#error').slideUp();
 
   $.post('/tasks', taskData)
     .then(() => {
@@ -95,8 +100,8 @@ const createTaskElement = function (taskData) {
   <article>
   <div class="list-container">
     <div class="left-column">
-      <form action="/tasks" method="POST">
-     <input type="checkbox" name="is_priority" class = "checkbox" />
+      <form action="/tasks/:id" method="POST">
+      <input type="checkbox" name="is_complete" class="checkbox" ${taskData.is_complete ? 'checked' : ''} />
     </form>
       ${icon}
       <p>${taskData.description}</p>
@@ -105,7 +110,6 @@ const createTaskElement = function (taskData) {
       <div class="editIcons">
       ${taskData.due_date ? `<p>Due: ${new Intl.DateTimeFormat('en-US', dateOptions).format(new Date(taskData.due_date))}</p>` : ''}
       ${taskData.is_priority ? '<i class="fa-solid fa-exclamation fa-2xl"></i>' : ''}
-      <i class="fa-solid fa-pen-to-square fa-2xl"></i>
       <i class="fa-solid fa-trash-can fa-2xl"></i>
       </div>
       <div class="timestamp">
@@ -115,7 +119,6 @@ const createTaskElement = function (taskData) {
   </div>
   </article>
   `;
-  console.log($task);
   return $task;
 };
 
