@@ -1,7 +1,7 @@
 /**
  * This functions searches for keywords in the task description to see if the category can be determined.
  * @param {string} taskDescription 
- * @returns A string containing the task category, if found, or undefined, if not.
+ * @returns A number containing the task category, if found, or undefined, if not.
  */
 const checkForCategoryKeywords = (taskDescription) => {
   const keywordMapping = {
