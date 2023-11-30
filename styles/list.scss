@@ -26,9 +26,17 @@
       flex-direction: row;
       align-items: center;
 
+
+
       label {
         display: inline-block;
         min-width: 200px;
+      }
+
+      @media screen and (max-width: 1320px) {
+        label {
+          min-width: 0;
+        }
       }
 
       button {
@@ -54,7 +62,12 @@
       flex-direction: column;
       align-items: left;
       margin: 12px;
-      min-width: 850px;
+
+      @media screen and (max-width: 1320px) {
+        .left-column {
+          min-width: 0;
+        }
+      }
 
       textarea {
         resize: none;
@@ -71,7 +84,6 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-
     font-weight: bold;
 
     i {
@@ -145,7 +157,6 @@
     input[type=checkbox] {
       margin-left: 12px;
     }
-
   }
 
   .editIcons {
@@ -171,4 +182,10 @@
 .right-column .fa-trash-can:hover {
   cursor: pointer;
   color: rgb(96, 93, 255);
+}
+
+input[type="checkbox"]:checked + p {
+  text-decoration: line-through;
+  text-decoration-color: red;
+  color: #dedede;
 }

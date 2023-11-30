@@ -172,3 +172,5 @@ const updateTaskStatusOnServer = function (taskId, isComplete) {
       console.error('Error updating task status:', error);
     });
 };
+
+$("")
