@@ -175,6 +175,9 @@
     input[type=checkbox] {
       margin-left: 12px;
     }
+form {
+display: flex;
+align-items: center;}
   }
 
   .editIcons {
@@ -202,8 +205,15 @@
   color: rgb(96, 93, 255);
 }
 
-input[type="checkbox"]:checked+p {
+input[type="checkbox"]:checked ~ p {
   text-decoration: line-through;
   text-decoration-color: red;
   color: #dedede;
 }
+
+input[type="checkbox"]:checked ~ i {
+  color: #dedede;
+}
+
+
+

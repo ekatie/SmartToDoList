@@ -110,9 +110,9 @@ const createTaskElement = function (taskData) {
     <div class="left-column">
       <form action="/tasks/:id" method="POST">
       <input type="checkbox" name="is_complete" data-task-id="${taskData.id}" id ="complete-checkbox" class="checkbox" ${taskData.is_complete ? 'checked' : ''} />
-    </form>
       ${icon}
-      <p>${taskData.description}</p>
+      <p class="task-description">${taskData.description}</p>
+    </form>
     </div>
     <div class="right-column">
       <div class="editIcons">
