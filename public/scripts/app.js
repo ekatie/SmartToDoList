@@ -88,19 +88,19 @@ const createTaskElement = function (taskData) {
   let icon;
   switch (taskData.category_id) {
     case 1:
-      icon = '<i class="fa-solid fa-burger fa-2xl"></i>';
+      icon = '<i class="fa-solid fa-burger fa-2xl" data-category-id="1"></i>';
       break;
     case 2:
-      icon = '<i class="fa-solid fa-book fa-2xl"></i>';
+      icon = '<i class="fa-solid fa-book fa-2xl" data-category-id="2"></i>';
       break;
     case 3:
-      icon = `<i class="fa-solid fa-desktop fa-2xl"></i>`;
+      icon = `<i class="fa-solid fa-desktop fa-2xl" data-category-id="3"></i>`;
       break;
     case 4:
-      icon = `<i class="fa-solid fa-cart-shopping fa-2xl"></i>`;
+      icon = `<i class="fa-solid fa-cart-shopping fa-2xl" data-category-id="4"></i>`;
       break;
     case 5:
-      icon = `<i class="fa-regular fa-lightbulb fa-2xl"></i>`;
+      icon = `<i class="fa-regular fa-lightbulb fa-2xl" data-category-id="5"></i>`;
       break;
   }
 
