@@ -26,7 +26,17 @@
       flex-direction: row;
       align-items: center;
 
+      input[type=date] {
+        // color: #81aeff;
+        background-color: transparent;
+        color: white;
+        border-radius: 5px;
+        border: 2px solid white;
+      }
 
+      input[type="date"]::-webkit-calendar-picker-indicator{
+        filter: invert(100%);
+}
 
       label {
         display: inline-block;
@@ -184,7 +194,7 @@
   color: rgb(96, 93, 255);
 }
 
-input[type="checkbox"]:checked + p {
+input[type="checkbox"]:checked+p {
   text-decoration: line-through;
   text-decoration-color: red;
   color: #dedede;
