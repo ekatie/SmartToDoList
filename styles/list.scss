@@ -26,12 +26,33 @@
       flex-direction: row;
       align-items: center;
 
+      input[type=date] {
+        background-color: transparent;
+        color: white;
+        border-radius: 5px;
+        border: 2px solid white;
+      }
+
+      input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(100%);
+      }
+
+      input[type=date]:focus {
+        outline: 2px solid #4f4cff;
+      }
+
       label {
         display: inline-block;
         min-width: 200px;
       }
 
-      button  {
+      @media screen and (max-width: 1320px) {
+        label {
+          min-width: 0;
+        }
+      }
+
+      button {
         border-radius: 50%;
         width: 50px;
         font-size: 36px;
@@ -54,7 +75,12 @@
       flex-direction: column;
       align-items: left;
       margin: 12px;
-      min-width: 850px;
+
+      @media screen and (max-width: 1320px) {
+        .left-column {
+          min-width: 0;
+        }
+      }
 
       textarea {
         resize: none;
@@ -62,6 +88,11 @@
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
         border-radius: 5px;
+        color: #7e7ee2;
+      }
+
+      textarea:focus {
+        outline: 2px solid #4f4cff;
       }
     }
 
@@ -71,7 +102,6 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-
     font-weight: bold;
 
     i {
@@ -97,10 +127,10 @@
     .right-column {
       justify-content: right;
 
-button {
-margin: 0;
-padding: 0 3em;
-  }
+      button {
+        margin: 0;
+        padding: 0 3em;
+      }
     }
   }
 }
@@ -113,6 +143,7 @@ padding: 0 3em;
   flex-direction: row;
   margin: 1em 0;
   font-weight: bold;
+
 
   i {
     height: 50px;
@@ -144,6 +175,9 @@ padding: 0 3em;
     input[type=checkbox] {
       margin-left: 12px;
     }
+form {
+display: flex;
+align-items: center;}
   }
 
   .editIcons {
@@ -164,3 +198,22 @@ padding: 0 3em;
     margin-left: 12px;
   }
 }
+
+.left-column i:hover,
+.right-column .fa-trash-can:hover {
+  cursor: pointer;
+  color: rgb(96, 93, 255);
+}
+
+input[type="checkbox"]:checked ~ p {
+  text-decoration: line-through;
+  text-decoration-color: red;
+  color: #dedede;
+}
+
+input[type="checkbox"]:checked ~ i {
+  color: #dedede;
+}
+
+
+

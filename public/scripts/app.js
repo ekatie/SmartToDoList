@@ -1,5 +1,6 @@
 //Apply code once document is ready
 $(document).ready(function () {
+
   //Hide error element
   $("#error").hide().empty();
   $("#addTask").hide();
@@ -22,6 +23,15 @@ $(document).ready(function () {
   loadTasks();
 });
 
+// Task marked as complete
+$(document).on('change', '#complete-checkbox', function (event) {
+
+  const taskId = $(this).data('task-id');
+  const isComplete = this.checked;
+
+  updateTaskStatusOnServer(taskId, isComplete);
+
+});
 
 /**
  * This function handles form submission for new tasks. After successfully posting a new task, it loads the updated tasks.
@@ -67,7 +77,10 @@ const onSubmit = function (event) {
 const createTaskElement = function (taskData) {
 
   const createdDate = new Date(taskData.created_date);
-  const completedDate = new Date(taskData.completed_date);
+
+  if (taskData.completed_date) {
+    completedDate = new Date(taskData.completed_date);
+  }
 
   const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
   const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -75,19 +88,19 @@ const createTaskElement = function (taskData) {
   let icon;
   switch (taskData.category_id) {
     case 1:
-      icon = '<i class="fa-solid fa-burger fa-2xl"></i>';
+      icon = '<i class="fa-solid fa-burger fa-2xl" data-category-id="1"></i>';
       break;
     case 2:
-      icon = '<i class="fa-solid fa-book fa-2xl"></i>';
+      icon = '<i class="fa-solid fa-book fa-2xl" data-category-id="2"></i>';
       break;
     case 3:
-      icon = `<i class="fa-solid fa-desktop fa-2xl"></i>`;
+      icon = `<i class="fa-solid fa-desktop fa-2xl" data-category-id="3"></i>`;
       break;
     case 4:
-      icon = `<i class="fa-solid fa-cart-shopping fa-2xl"></i>`;
+      icon = `<i class="fa-solid fa-cart-shopping fa-2xl" data-category-id="4"></i>`;
       break;
     case 5:
-      icon = `<i class="fa-regular fa-lightbulb fa-2xl"></i>`;
+      icon = `<i class="fa-regular fa-lightbulb fa-2xl" data-category-id="5"></i>`;
       break;
   }
 
@@ -96,16 +109,15 @@ const createTaskElement = function (taskData) {
   <div class="list-container">
     <div class="left-column">
       <form action="/tasks/:id" method="POST">
-      <input type="checkbox" name="is_complete" class="checkbox" ${taskData.is_complete ? 'checked' : ''} />
-    </form>
+      <input type="checkbox" name="is_complete" data-task-id="${taskData.id}" id ="complete-checkbox" class="checkbox" ${taskData.is_complete ? 'checked' : ''} />
       ${icon}
-      <p>${taskData.description}</p>
+      <p class="task-description">${taskData.description}</p>
+    </form>
     </div>
     <div class="right-column">
       <div class="editIcons">
       ${taskData.due_date ? `<p>Due: ${new Intl.DateTimeFormat('en-US', dateOptions).format(new Date(taskData.due_date))}</p>` : ''}
       ${taskData.is_priority ? '<i class="fa-solid fa-exclamation fa-2xl"></i>' : ''}
-      <i class="fa-solid fa-pen-to-square fa-2xl"></i>
       <i class="fa-solid fa-trash-can fa-2xl"></i>
       </div>
       <div class="timestamp">
@@ -127,7 +139,7 @@ const renderTasks = function (tasks) {
   $('#list-container').empty();
 
   // Render all the tasks, including new ones
-  tasks.forEach(task => {
+  tasks.forEach((task) => {
     $('#list-container').prepend(createTaskElement(task));
   });
 };
@@ -145,3 +157,20 @@ const loadTasks = function () {
       $('#error').slideDown();
     });
 };
+
+const updateTaskStatusOnServer = function (taskId, isComplete) {
+  const data = {
+    id: taskId,
+    is_complete: isComplete
+  };
+
+  $.post(`/tasks/${taskId}`, data)
+    .then(() => {
+      loadTasks();
+    })
+    .catch((error) => {
+      console.error('Error updating task status:', error);
+    });
+};
+
+$("")
