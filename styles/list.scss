@@ -157,7 +157,7 @@
     width: 100%;
     display: flex;
   }
-  
+
   .right-column {
     justify-content: right;
     flex-direction: column;
@@ -213,7 +213,9 @@ input[type="checkbox"]:checked~i {
 }
 
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
+// Responsive design section
+
+//Remove text area min-width and left-column min width below 1320px screen width
 @media only screen and (max-width: 1320px) {
   .listView-container {
     .right-column {
@@ -228,6 +230,7 @@ input[type="checkbox"]:checked~i {
   }
 }
 
+//Change calender and priority checkbox inputs to display below labels below 1100px screen width
 @media only screen and (max-width: 1100px) {
   .listView-container {
     .right-column {
@@ -243,6 +246,7 @@ input[type="checkbox"]:checked~i {
   }
 }
 
+//Stack container elements in a column below 900px
 @media only screen and (max-width: 900px) {
   .listView-container {
     #addTask {
@@ -250,6 +254,19 @@ input[type="checkbox"]:checked~i {
 
       .left-column {
         width: auto;
+      }
+    }
+  }
+}
+
+//Place add item button bellow filter icons on small screens
+@media only screen and (max-width: 650px) {
+  .listView-container {
+    .list-header {
+      flex-direction: column;
+
+      .right-column {
+        justify-content: center;
       }
     }
   }
