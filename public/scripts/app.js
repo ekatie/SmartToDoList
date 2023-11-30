@@ -139,7 +139,7 @@ const renderTasks = function (tasks) {
   $('#list-container').empty();
 
   // Render all the tasks, including new ones
-  tasks.forEach(task => {
+  tasks.forEach((task) => {
     $('#list-container').prepend(createTaskElement(task));
   });
 };
