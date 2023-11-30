@@ -46,12 +46,6 @@
         min-width: 200px;
       }
 
-      @media screen and (max-width: 1320px) {
-        label {
-          min-width: 0;
-        }
-      }
-
       button {
         border-radius: 50%;
         width: 50px;
@@ -75,12 +69,6 @@
       flex-direction: column;
       align-items: left;
       margin: 12px;
-
-      @media screen and (max-width: 1320px) {
-        .left-column {
-          min-width: 0;
-        }
-      }
 
       textarea {
         resize: none;
@@ -175,9 +163,11 @@
     input[type=checkbox] {
       margin-left: 12px;
     }
-form {
-display: flex;
-align-items: center;}
+
+    form {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .editIcons {
@@ -205,15 +195,40 @@ align-items: center;}
   color: rgb(96, 93, 255);
 }
 
-input[type="checkbox"]:checked ~ p {
+input[type="checkbox"]:checked~p {
   text-decoration: line-through;
   text-decoration-color: red;
   color: #dedede;
 }
 
-input[type="checkbox"]:checked ~ i {
+input[type="checkbox"]:checked~i {
   color: #dedede;
 }
 
 
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (max-width: 1320px) {
+  .listView-container {
+    .right-column {
+      label {
+        min-width: 0;
+      }
+    }
+
+    .left-column {
+      min-width: 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .listView-container {
+    .right-column {
+      p {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
 
