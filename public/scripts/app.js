@@ -110,9 +110,9 @@ const createTaskElement = function (taskData) {
     <div class="left-column">
       <form action="/tasks/:id" method="POST">
       <input type="checkbox" name="is_complete" data-task-id="${taskData.id}" id ="complete-checkbox" class="checkbox" ${taskData.is_complete ? 'checked' : ''} />
-    </form>
       ${icon}
-      <p>${taskData.description}</p>
+      <p class="task-description">${taskData.description}</p>
+    </form>
     </div>
     <div class="right-column">
       <div class="editIcons">
@@ -139,7 +139,7 @@ const renderTasks = function (tasks) {
   $('#list-container').empty();
 
   // Render all the tasks, including new ones
-  tasks.forEach(task => {
+  tasks.forEach((task) => {
     $('#list-container').prepend(createTaskElement(task));
   });
 };
@@ -172,3 +172,5 @@ const updateTaskStatusOnServer = function (taskId, isComplete) {
       console.error('Error updating task status:', error);
     });
 };
+
+$("")
