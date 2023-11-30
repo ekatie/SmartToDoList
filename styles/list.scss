@@ -1,3 +1,6 @@
+//List view styling
+
+//Style overall conatainer that holds three sections
 .listView-container {
   width: 90%;
   background-color: transparent;
@@ -6,6 +9,7 @@
   padding-right: 1.5em;
   margin-top: 130px;
 
+  //Style add task section
   #addTask {
     border: solid 3px white;
     border-radius: 25px;
@@ -86,6 +90,7 @@
 
   }
 
+  //Style list header section where filter selection icons are provided
   .list-header {
     display: flex;
     justify-content: space-between;
@@ -99,6 +104,7 @@
       align-items: center;
     }
 
+    //Create class that gets passed to different icons upon clicking
     .isActive {
       color: rgb(96, 93, 255);
     }
@@ -123,6 +129,7 @@
   }
 }
 
+//Style list container section where tasks are rendered
 .list-container {
   border: solid 3px white;
   border-radius: 25px;
@@ -150,7 +157,7 @@
     width: 100%;
     display: flex;
   }
-
+  
   .right-column {
     justify-content: right;
     flex-direction: column;
@@ -228,7 +235,22 @@ input[type="checkbox"]:checked~i {
         display: flex;
         flex-direction: column;
       }
+
+      input {
+        margin-top: 12px;
+      }
     }
   }
 }
 
+@media only screen and (max-width: 900px) {
+  .listView-container {
+    #addTask {
+      flex-direction: column;
+
+      .left-column {
+        width: auto;
+      }
+    }
+  }
+}

@@ -1,13 +1,20 @@
+<!-- List View conatains three sections-->
 <div class="listView-container">
+
+  <!-- Dynamic message div -->
   <div id="error">Error</div>
   <form id="new-task" action="/tasks" method="POST">
+
+    <!-- Add task form section (section 1)  -->
     <div id="addTask">
 
+      <!-- Left column for styling -->
       <div class="left-column">
         <p>I gotta do this thing:</p>
         <textarea name="description" id="task-text"></textarea>
       </div>
 
+      <!-- Right column for styling -->
       <div class="right-column">
         <div>
           <p><label for="due_date" type="date">Due Date</label><input type="date" name="due_date" id="due_date" /></p>
@@ -21,7 +28,10 @@
     </div>
   </form>
 
+  <!-- List header section to select filter option icons section(2) -->
   <div class="list-header">
+
+  <!-- Left column for styling -->
     <div class="left-column">
       <p>VIEW:</p>
       <i class="fa-solid fa-list fa-2xl isActive"></i>
@@ -31,10 +41,13 @@
       <i class="fa-solid fa-burger fa-2xl"></i>
       <i class="fa-regular fa-lightbulb fa-2xl"></i>
     </div>
+
+<!-- Right column for styling -->
     <div class="right-column">
       <button id="addTaskButton">Add Item &#43</button>
     </div>
   </div>
-  <div id="list-container">
-  </div>
+
+<!-- List container section to render tasks section(3) -->
+  <div id="list-container"></div>
 </div>

@@ -173,4 +173,3 @@ const updateTaskStatusOnServer = function (taskId, isComplete) {
     });
 };
 
-$("")
