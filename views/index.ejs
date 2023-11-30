@@ -1,5 +1,8 @@
+<!-- Main page to render header along with login or list partils -->
 <!DOCTYPE html>
 <html lang="en">
+
+<!-- Import stylesheets, jquery, and fontawesome kit -->
 
 <head>
   <title>Home Page</title>
@@ -20,16 +23,19 @@
 </head>
 
 <body>
+
+  <!-- Use ejs to create conditional statements to render views based on if user is logged in -->
   <%- include('partials/_header') %>
-    <!-- If user is logged in, displays logout button -->
+    <!-- If user is logged in, displays list view -->
     <% if(user){ %>
       <%- include('partials/_list') %>
-        <!-- If user is not logged in, displays links to the register and login views -->
+        <!-- If user is not logged in, displays login form -->
         <% } else{ %>
           <%- include('partials/_login') %>
             <% } %>
 
-               <script defer src="/scripts/app.js"></script>
+              <!-- Import app.js -->
+              <script defer src="/scripts/app.js"></script>
 </body>
 
 </html>

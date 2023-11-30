@@ -1,3 +1,6 @@
+//List view styling
+
+//Style overall conatainer that holds three sections
 .listView-container {
   width: 90%;
   background-color: transparent;
@@ -6,6 +9,7 @@
   padding-right: 1.5em;
   margin-top: 130px;
 
+  //Style add task section
   #addTask {
     border: solid 3px white;
     border-radius: 25px;
@@ -46,12 +50,6 @@
         min-width: 200px;
       }
 
-      @media screen and (max-width: 1320px) {
-        label {
-          min-width: 0;
-        }
-      }
-
       button {
         border-radius: 50%;
         width: 50px;
@@ -76,12 +74,6 @@
       align-items: left;
       margin: 12px;
 
-      @media screen and (max-width: 1320px) {
-        .left-column {
-          min-width: 0;
-        }
-      }
-
       textarea {
         resize: none;
         height: 4em;
@@ -98,6 +90,7 @@
 
   }
 
+  //Style list header section where filter selection icons are provided
   .list-header {
     display: flex;
     justify-content: space-between;
@@ -111,6 +104,7 @@
       align-items: center;
     }
 
+    //Create class that gets passed to different icons upon clicking
     .isActive {
       color: rgb(96, 93, 255);
     }
@@ -135,6 +129,7 @@
   }
 }
 
+//Style list container section where tasks are rendered
 .list-container {
   border: solid 3px white;
   border-radius: 25px;
@@ -175,9 +170,11 @@
     input[type=checkbox] {
       margin-left: 12px;
     }
-form {
-display: flex;
-align-items: center;}
+
+    form {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .editIcons {
@@ -205,15 +202,72 @@ align-items: center;}
   color: rgb(96, 93, 255);
 }
 
-input[type="checkbox"]:checked ~ p {
+input[type="checkbox"]:checked~p {
   text-decoration: line-through;
   text-decoration-color: red;
   color: #dedede;
 }
 
-input[type="checkbox"]:checked ~ i {
+input[type="checkbox"]:checked~i {
   color: #dedede;
 }
 
 
+// Responsive design section
 
+//Remove text area min-width and left-column min width below 1320px screen width
+@media only screen and (max-width: 1320px) {
+  .listView-container {
+    .right-column {
+      label {
+        min-width: 0;
+      }
+    }
+
+    .left-column {
+      min-width: 0;
+    }
+  }
+}
+
+//Change calender and priority checkbox inputs to display below labels below 1100px screen width
+@media only screen and (max-width: 1100px) {
+  .listView-container {
+    .right-column {
+      p {
+        display: flex;
+        flex-direction: column;
+      }
+
+      input {
+        margin-top: 12px;
+      }
+    }
+  }
+}
+
+//Stack container elements in a column below 900px
+@media only screen and (max-width: 900px) {
+  .listView-container {
+    #addTask {
+      flex-direction: column;
+
+      .left-column {
+        width: auto;
+      }
+    }
+  }
+}
+
+//Place add item button bellow filter icons on small screens
+@media only screen and (max-width: 650px) {
+  .listView-container {
+    .list-header {
+      flex-direction: column;
+
+      .right-column {
+        justify-content: center;
+      }
+    }
+  }
+}

@@ -1,10 +1,10 @@
-// See: https://sass-lang.com/
-
+//Set Global margins to 0
 body,
 html {
   margin: 0;
 }
 
+//Global button styling
 button {
   border: solid 1.5px white;
   color: white;
@@ -16,14 +16,9 @@ button {
   margin: 10px;
 }
 
+//Blobal button hover styling
 button:hover {
   cursor: pointer;
   background-color: #605dff;
   ;
 }
-
-//  @media screen and (min-width: 992px) {
-//     nav {
-//       background-color: #4056A1;
-//     }
-//  }
