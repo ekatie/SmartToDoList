@@ -1,13 +1,13 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const database = require("../db/database");
 
 // show all tasks
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   // Check if user is logged in, if not then redirect to login page
   const userId = 4;
   if (!userId) {
-    return res.redirect('/login');
+    return res.redirect("/login");
   }
 
   // User logged in, display users tasks
@@ -16,42 +16,44 @@ router.get('/', (req, res) => {
     .then((tasks) => res.json(tasks))
     .catch((e) => {
       console.error(e);
-      res.status(500).json({ message: 'An error was encountered while fetching your tasks!' });
+      res.status(500).json({
+        message: "An error was encountered while fetching your tasks!",
+      });
     });
 });
 
 // Add new task
-router.post('/', (req, res) => {
-
+router.post("/", (req, res) => {
   // Check if user is logged in, if not then redirect to login page
   const userId = 4;
   if (!userId) {
-    return res.redirect('/login');
+    return res.redirect("/login");
   }
 
   const newTask = req.body;
   newTask.user_id = userId;
 
   const creationTimestamp = new Date();
-  newTask.created_date = creationTimestamp.toISOString().slice(0, 19).replace("T", " ");
+  newTask.created_date = creationTimestamp
+    .toISOString()
+    .slice(0, 19)
+    .replace("T", " ");
 
   return database
     .addTask(newTask)
     .then((task) => res.json(task))
     .catch((e) => {
       console.error(e);
-      res.status(500).json({ message: 'Failed to add new task' });
+      res.status(500).json({ message: "Failed to add new task" });
     });
-
 });
 
 // Update single task - category or is_complete status
-router.post('/:id', (req, res) => {
-
+router.post("/:id", (req, res) => {
   // Check if user is logged in, if not then redirect to login page
   const userId = 4;
   if (!userId) {
-    return res.redirect('/login');
+    return res.redirect("/login");
   }
 
   const task = req.body;
@@ -64,7 +66,7 @@ router.post('/:id', (req, res) => {
       .then((task) => res.json(task))
       .catch((e) => {
         console.error(e);
-        res.status(500).json({ message: 'Failed to update task category' });
+        res.status(500).json({ message: "Failed to update task category" });
       });
   } else {
     return database
@@ -72,31 +74,44 @@ router.post('/:id', (req, res) => {
       .then((task) => res.json(task))
       .catch((e) => {
         console.error(e);
-        res.status(500).json({ message: 'Failed to update task status' });
+        res.status(500).json({ message: "Failed to update task status" });
       });
   }
-
 });
 
 // delete single task
-router.post('/:id/delete', (req, res) => {
-
+router.post("/:id/delete", (req, res) => {
   // Check if user is logged in, if not then redirect to login page
   const userId = 4;
   if (!userId) {
-    return res.redirect('/login');
+    return res.redirect("/login");
   }
 
   const task = req.body;
 
   return database
     .deleteTask(task.id)
-    .then(() => res.json({ message: 'Task deleted successfully' }))
+    .then(() => res.json({ message: "Task deleted successfully" }))
     .catch((error) => {
       console.error(error);
-      res.status(500).json({ message: 'Failed to delete task' });
+      res.status(500).json({ message: "Failed to delete task" });
     });
+});
 
+router.get("/sort/:id", (req, res) => {
+  console.log("route: ", req.params);
+
+  const category = req.params.id;
+
+  return database
+    .filterTasks(category)
+    .then((tasks) => res.json(tasks.rows))
+    .catch((e) => {
+      console.error(e);
+      res.status(500).json({
+        message: "An error was encountered while filtering your tasks!",
+      });
+    });
 });
 
 module.exports = router;
