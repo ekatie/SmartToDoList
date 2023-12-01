@@ -1,4 +1,4 @@
-INSERT INTO tasks (id, user_id, category_id, description, is_complete, created_date, completed_date, is_priority, due_date) VALUES
+INSERT INTO tasks (user_id, category_id, description, is_complete, created_date, completed_date, is_priority, due_date) VALUES
 (1, 2, 'Watch Lord of the Rings Trilogy', FALSE, NOW(), NULL, FALSE, NULL),
 (1, 4, 'Buy games from Autumn Steam Sale', FALSE, NOW(), NULL, TRUE, NULL),
 (2, 1, 'Eat Falafel', FALSE, NOW(), NULL, TRUE, NULL),
