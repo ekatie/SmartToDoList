@@ -20,8 +20,7 @@ $(document).ready(function () {
     onSubmit(event);
   });
 
-
-
+  // Load tasks
   loadTasks();
 });
 
@@ -34,6 +33,37 @@ $(document).on('change', '.checkbox', function (event) {
   updateTaskStatusOnServer(taskId, isComplete);
 
 });
+
+// Delete task
+$(document).on('click', 'i.fa-trash-can', function (event) {
+  const taskId = $(this).data('task-id');
+
+  swal({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover this task!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+    .then((willDelete) => {
+      if (willDelete) {
+        deleteTask(taskId);
+      }
+    });
+});
+
+const deleteTask = function (taskId) {
+
+  $.post(`/tasks/${taskId}/delete`, { taskId })
+    .then((response) => {
+      swal(response.message);
+      loadTasks();
+    })
+    .catch((error) => {
+      $('#error').text("Oops! An error occurred while deleting your task.");
+      $('#error').slideDown();
+    });
+};
 
 
 /**
@@ -133,7 +163,7 @@ const createTaskElement = function (taskData) {
       <div class="editIcons">
       ${taskData.due_date ? `<p>Due: ${new Intl.DateTimeFormat('en-US', dateOptions).format(new Date(taskData.due_date))}</p>` : ''}
       ${taskData.is_priority ? '<i class="fa-solid fa-exclamation fa-2xl"></i>' : ''}
-      <i class="fa-solid fa-trash-can fa-2xl"></i>
+      <i class="fa-solid fa-trash-can fa-2xl" data-task-id="${taskData.id}"></i>
       </div>
       <div class="timestamp">
       ${!taskData.completed_date ? `<p>Added: ${new Intl.DateTimeFormat('en-US', options).format(createdDate)}</p>` : `<p>Completed: ${new Intl.DateTimeFormat('en-US', options).format(completedDate)}</p>`}
