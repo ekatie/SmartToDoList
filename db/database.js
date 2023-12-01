@@ -182,17 +182,18 @@ const deleteTask = function (taskId) {
   });
 };
 
-const filterTasks = (category) => {
-  const query = `SELECT * FROM tasks
+const filterTasks = (category, userId) => {
+  const query = `SELECT * FROM tasks 
+    JOIN users ON tasks.user_id = users.id 
     JOIN categories ON tasks.category_id = categories.id
-    WHERE categories.id = $1
+    WHERE categories.id = $1 AND user_id = $2
     ORDER BY
     CASE WHEN is_complete THEN 0 ELSE 1 END,
     CASE WHEN is_priority THEN 1 ELSE 0 END,
     completed_date DESC NULLS LAST,
     created_date ASC;`;
 
-  const values = [category];
+  const values = [category, userId];
 
   return pool.query(query, values).then((filteredTasks) => {
     return filteredTasks;
