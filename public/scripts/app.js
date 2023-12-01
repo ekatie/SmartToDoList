@@ -1,6 +1,5 @@
 //Apply code once document is ready
 $(document).ready(function () {
-
   //Hide error element
   $("#error").hide().empty();
   $("#addTask").hide();
@@ -16,21 +15,29 @@ $(document).ready(function () {
   });
 
   // New task form submitted
-  $('#new-task').on('submit', function (event) {
+  $("#new-task").on("submit", function (event) {
     onSubmit(event);
   });
 
+  $(".left-column i").click(function () {
+    const categoryId = $(this).data("category-id");
+    if (categoryId) {
+      $.get(`/tasks/sort/${categoryId}`).done((filteredTasks) =>
+        renderTasks(filteredTasks)
+      );
+    } else {
+      loadTasks();
+    }
+  });
   loadTasks();
 });
 
 // Task marked as complete
-$(document).on('change', '#complete-checkbox', function (event) {
-
-  const taskId = $(this).data('task-id');
+$(document).on("change", "#complete-checkbox", function (event) {
+  const taskId = $(this).data("task-id");
   const isComplete = this.checked;
 
   updateTaskStatusOnServer(taskId, isComplete);
-
 });
 
 /**
@@ -39,51 +46,58 @@ $(document).on('change', '#complete-checkbox', function (event) {
  */
 const onSubmit = function (event) {
   event.preventDefault();
-  const taskData = $('#new-task').serialize();
+  const taskData = $("#new-task").serialize();
 
   // Trim the task content to remove leading and trailing spaces
-  const trimmedTask = $('#task-text').val().trim();
+  const trimmedTask = $("#task-text").val().trim();
 
   // No content entered
   if (!trimmedTask) {
-    $('#error').text("Please enter a task.");
-    $('#error').slideDown({
+    $("#error").text("Please enter a task.");
+    $("#error").slideDown({
       start: function () {
-        $('#error').css('display', 'flex');
-      }
+        $("#error").css("display", "flex");
+      },
     });
     return;
   }
 
   // Clear text input field, remove errors
-  $('#new-task')[0].reset();
-  $('#error').slideUp();
+  $("#new-task")[0].reset();
+  $("#error").slideUp();
 
-  $.post('/tasks', taskData)
+  $.post("/tasks", taskData)
     .then(() => {
       loadTasks();
     })
     .catch((error) => {
-      $('#error').text("Oops! An error occurred while adding your task.");
-      $('#error').slideDown();
+      $("#error").text("Oops! An error occurred while adding your task.");
+      $("#error").slideDown();
     });
 };
 
 /**
-* This function creates a task element from an object containing task data.
-* @param {object} taskData - Object containing task data.
-* @returns - Task element
-*/
+ * This function creates a task element from an object containing task data.
+ * @param {object} taskData - Object containing task data.
+ * @returns - Task element
+ */
 const createTaskElement = function (taskData) {
-
   const createdDate = new Date(taskData.created_date);
 
   if (taskData.completed_date) {
     completedDate = new Date(taskData.completed_date);
   }
 
-  const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
-  const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    hour12: true,
+  };
+  const dateOptions = { year: "numeric", month: "long", day: "numeric" };
 
   let icon;
   switch (taskData.category_id) {
@@ -109,19 +123,41 @@ const createTaskElement = function (taskData) {
   <div class="list-container">
     <div class="left-column">
       <form action="/tasks/:id" method="POST">
-      <input type="checkbox" name="is_complete" data-task-id="${taskData.id}" id ="complete-checkbox" class="checkbox" ${taskData.is_complete ? 'checked' : ''} />
+      <input type="checkbox" name="is_complete" data-task-id="${
+        taskData.id
+      }" id ="complete-checkbox" class="checkbox" ${
+    taskData.is_complete ? "checked" : ""
+  } />
       ${icon}
       <p class="task-description">${taskData.description}</p>
     </form>
     </div>
     <div class="right-column">
       <div class="editIcons">
-      ${taskData.due_date ? `<p>Due: ${new Intl.DateTimeFormat('en-US', dateOptions).format(new Date(taskData.due_date))}</p>` : ''}
-      ${taskData.is_priority ? '<i class="fa-solid fa-exclamation fa-2xl"></i>' : ''}
+      ${
+        taskData.due_date
+          ? `<p>Due: ${new Intl.DateTimeFormat("en-US", dateOptions).format(
+              new Date(taskData.due_date)
+            )}</p>`
+          : ""
+      }
+      ${
+        taskData.is_priority
+          ? '<i class="fa-solid fa-exclamation fa-2xl"></i>'
+          : ""
+      }
       <i class="fa-solid fa-trash-can fa-2xl"></i>
       </div>
       <div class="timestamp">
-      ${!taskData.completed_date ? `<p>Added: ${new Intl.DateTimeFormat('en-US', options).format(createdDate)}</p>` : `<p>Completed: ${new Intl.DateTimeFormat('en-US', options).format(completedDate)}</p>`}
+      ${
+        !taskData.completed_date
+          ? `<p>Added: ${new Intl.DateTimeFormat("en-US", options).format(
+              createdDate
+            )}</p>`
+          : `<p>Completed: ${new Intl.DateTimeFormat("en-US", options).format(
+              completedDate
+            )}</p>`
+      }
       </div>
     </div>
   </div>
@@ -136,11 +172,11 @@ const createTaskElement = function (taskData) {
  */
 const renderTasks = function (tasks) {
   // Clear the container
-  $('#list-container').empty();
+  $("#list-container").empty();
 
   // Render all the tasks, including new ones
   tasks.forEach((task) => {
-    $('#list-container').prepend(createTaskElement(task));
+    $("#list-container").prepend(createTaskElement(task));
   });
 };
 
@@ -148,20 +184,20 @@ const renderTasks = function (tasks) {
  * This function loads the existing tasks.
  */
 const loadTasks = function () {
-  $.get('/tasks')
+  $.get("/tasks")
     .done((res) => {
       renderTasks(res);
     })
     .fail((error) => {
-      $('#error').text('Oops! An error occurred while loading tasks.');
-      $('#error').slideDown();
+      $("#error").text("Oops! An error occurred while loading tasks.");
+      $("#error").slideDown();
     });
 };
 
 const updateTaskStatusOnServer = function (taskId, isComplete) {
   const data = {
     id: taskId,
-    is_complete: isComplete
+    is_complete: isComplete,
   };
 
   $.post(`/tasks/${taskId}`, data)
@@ -169,7 +205,6 @@ const updateTaskStatusOnServer = function (taskId, isComplete) {
       loadTasks();
     })
     .catch((error) => {
-      console.error('Error updating task status:', error);
+      console.error("Error updating task status:", error);
     });
 };
-
