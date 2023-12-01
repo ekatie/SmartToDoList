@@ -1,3 +1,4 @@
+//Navbar styling
 nav {
   width: 100%;
   display: flex;
@@ -11,6 +12,7 @@ nav {
   position: fixed;
   top: 0;
 
+//Set icon size and location from the left
   img {
     height: 65px;
     margin-left: 5px;
@@ -38,9 +40,17 @@ nav {
   form {
     display: flex;
   }
-
+//Display user email address and Logged in as: text on one line
   h5 {
     white-space: nowrap;
-    align-self: center
+    align-self: center;
+    font-size: 1em;
+  }
+}
+
+//Reduce font size to responsive on smaller screens
+@media only screen and (max-width: 600px) {
+  nav h5 {
+    font-size: .85em;
   }
 }

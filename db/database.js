@@ -12,6 +12,7 @@ const openai = new OpenAI({
  * @return {string} returns the answer of chatGPT API based on the userInput
  */
 async function getCategoryFromAPI(userInput) {
+
   const completion = await openai.chat.completions.create({
     model: "gpt-3.5-turbo-1106",
     messages: [
@@ -21,12 +22,13 @@ async function getCategoryFromAPI(userInput) {
           "You are a smart to-do list that categorizes user input with only one of the following: eat, watch, read, buy, do",
       },
       { role: "user", content: `${userInput}` },
+
     ],
     //temperature controls randomness: Lowering results in less random completions. As temperature approaches 0, the model will become deterministic and repetitive.
     temperature: 1,
 
     //The maximum number of token to generate shared between the prompt and completion. The exact limit varies by model (One token is roughly 4 characters for standard English Text)
-    max_tokens: 256,
+    max_tokens: 2,
 
     //Controls diversity via nucleus sampling: 0.5 means half of all likelihood-weighted options are considered
     top_p: 1,
@@ -71,9 +73,10 @@ const getUserTasks = function (userId) {
   JOIN categories ON tasks.category_id = categories.id
   WHERE user_id = $1
   ORDER BY
-    CASE WHEN completed_date IS NULL THEN 1 ELSE 0 END,
+    CASE WHEN is_complete THEN 0 ELSE 1 END,
     CASE WHEN is_priority THEN 1 ELSE 0 END,
-    created_date;`;
+    completed_date DESC NULLS LAST,
+    created_date ASC;`;
 
   return pool.query(query, [userId]).then((result) => {
     return result.rows;
@@ -85,18 +88,18 @@ const getUserTasks = function (userId) {
  * @param {{}} task An object containing all of the task details.
  * @return {Promise<{}>} A promise to the task.
  */
-const addTask = function (task) {
-  // Set due date to null if empty
+const addTask = async function (task) {
   task.due_date = task.due_date === "" ? null : task.due_date;
 
-  // Determine task category
   task.category_id = checkForCategoryKeywords(task.description);
 
   if (!task.category_id) {
-    const category_name = getCategoryFromAPI(task.description);
-    return checkForCategoryKeywords(category_name)
-      ? checkForCategoryKeywords(category_name)
-      : 5;
+    try {
+      const category_name = await getCategoryFromAPI(task.description);
+      task.category_id = checkForCategoryKeywords(category_name) ? checkForCategoryKeywords(category_name) : 5;
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   const query = `
@@ -125,10 +128,11 @@ VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`;
  * @return {Promise<{}>} A promise to the task category.
  */
 const editTaskCategory = function (taskId, taskCategoryId) {
+
   const query = `
   UPDATE tasks
   SET category_id = $1
-  WHERE task.id = $2 RETURNING *;`;
+  WHERE tasks.id = $2 RETURNING *;`;
 
   const values = [taskCategoryId, taskId];
 
@@ -144,12 +148,14 @@ const editTaskCategory = function (taskId, taskCategoryId) {
  * @return {Promise<{}>} A promise to the task status.
  */
 const updateTaskStatus = function (taskId, isComplete) {
+  isComplete = isComplete === 'true';
+
   const query = `
     UPDATE tasks
     SET
       is_complete = $1,
       completed_date = ${isComplete ? "NOW()" : "null"}
-    WHERE task.id = $2
+    WHERE tasks.id = $2
     RETURNING *;`;
 
   const values = [isComplete, taskId];
@@ -167,7 +173,7 @@ const updateTaskStatus = function (taskId, isComplete) {
 const deleteTask = function (taskId) {
   const query = `
   DELETE FROM tasks
-  WHERE task.id = $1;`;
+  WHERE tasks.id = $1;`;
 
   const values = [taskId];
 

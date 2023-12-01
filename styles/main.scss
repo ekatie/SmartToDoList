@@ -1,3 +1,4 @@
+//Global body styling
 body {
   display: flex;
   flex-direction: column;
@@ -5,13 +6,14 @@ body {
   align-items: center;
   background: #73abfa;
   font-family: sans-serif;
-
+ 
+//Global checkbox size
   input[type=checkbox] {
     line-height: normal;
     width: 20px;
     height: 20px;
   }
-
+//Global error message styling
   #error {
     color: red;
     border: solid 3px red;
@@ -24,6 +26,7 @@ body {
   }
 }
 
+//Import other SCSS files in use
 @import "navbar";
 @import "login";
 @import "list";
