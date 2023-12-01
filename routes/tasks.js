@@ -58,9 +58,9 @@ router.post('/:id', (req, res) => {
   task.user_id = userId;
 
   // Call function based on what column value was edited - category or is_complete status
-  if (task.category) {
+  if (task.categoryId) {
     return database
-      .editTaskCategory(task.id, task.category)
+      .editTaskCategory(task.taskId, task.categoryId)
       .then((task) => res.json(task))
       .catch((e) => {
         console.error(e);
