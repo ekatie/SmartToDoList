@@ -99,12 +99,15 @@ router.post("/:id/delete", (req, res) => {
 });
 
 router.get("/sort/:id", (req, res) => {
+  req.session.user_id = 4;
+
   console.log("route: ", req.params);
 
+  const userId = req.session.user_id;
   const category = req.params.id;
 
   return database
-    .filterTasks(category)
+    .filterTasks(category, userId)
     .then((tasks) => res.json(tasks.rows))
     .catch((e) => {
       console.error(e);
