@@ -11,8 +11,9 @@ nav {
   justify-content: space-between;
   position: fixed;
   top: 0;
+  z-index: 1;
 
-//Set icon size and location from the left
+  //Set icon size and location from the left
   img {
     height: 65px;
     margin-left: 5px;
@@ -40,7 +41,8 @@ nav {
   form {
     display: flex;
   }
-//Display user email address and Logged in as: text on one line
+
+  //Display user email address and Logged in as: text on one line
   h5 {
     white-space: nowrap;
     align-self: center;
