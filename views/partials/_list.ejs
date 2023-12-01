@@ -1,8 +1,8 @@
 <!-- List View conatains three sections-->
-<div class="listView-container">
+<div class="listView-container animate__animated animate__backInRight animate__slower">
 
   <!-- Dynamic message div -->
-  <div id="error">Error</div>
+  <div id="error"></div>
   <form id="new-task" action="/tasks" method="POST">
 
     <!-- Add task form section (section 1)  -->
@@ -34,17 +34,17 @@
   <!-- Left column for styling -->
     <div class="left-column">
       <p>VIEW:</p>
-      <i class="fa-solid fa-list fa-2xl isActive"></i>
-      <i class="fa-solid fa-book fa-2xl" data-category-id="2"></i>
-      <i class="fa-solid fa-desktop fa-2xl" data-category-id="3"></i>
-      <i class="fa-solid fa-cart-shopping fa-2xl" data-category-id="4"></i>
-      <i class="fa-solid fa-burger fa-2xl" data-category-id="1"></i>
-      <i class="fa-regular fa-lightbulb fa-2xl" data-category-id="5"></i>
+      <i class="fa-solid fa-list fa-2xl isActive animate__animated animate__bounce animate__delay-3s"></i>
+      <i class="fa-solid fa-book fa-2xl animate__animated animate__bounce animate__delay-4s" data-category-id="2"></i>
+      <i class="fa-solid fa-desktop fa-2xl animate__animated animate__bounce animate__delay-3s" data-category-id="3"></i>
+      <i class="fa-solid fa-cart-shopping fa-2xl animate__animated animate__bounce animate__delay-4s" data-category-id="4"></i>
+      <i class="fa-solid fa-burger fa-2xl animate__animated animate__bounce animate__delay-3s" data-category-id="1"></i>
+      <i class="fa-regular fa-lightbulb fa-2xl animate__animated animate__bounce animate__delay-4s" data-category-id="5"></i>
     </div>
 
 <!-- Right column for styling -->
     <div class="right-column">
-      <button id="addTaskButton">Add Item &#43</button>
+      <button id="addTaskButton" class = "animate__animated animate__flip animate__delay-5s">Add Item &#43</button>
     </div>
   </div>
 
