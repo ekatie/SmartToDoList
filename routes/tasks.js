@@ -87,10 +87,10 @@ router.post('/:id/delete', (req, res) => {
     return res.redirect('/login');
   }
 
-  const task = req.body;
+  const taskId = req.body.taskId;
 
   return database
-    .deleteTask(task.id)
+    .deleteTask(taskId)
     .then(() => res.json({ message: 'Task deleted successfully' }))
     .catch((error) => {
       console.error(error);
