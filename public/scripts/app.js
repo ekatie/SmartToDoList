@@ -20,11 +20,13 @@ $(document).ready(function () {
     onSubmit(event);
   });
 
+
+
   loadTasks();
 });
 
 // Task marked as complete
-$(document).on('change', '#complete-checkbox', function (event) {
+$(document).on('change', '.checkbox', function (event) {
 
   const taskId = $(this).data('task-id');
   const isComplete = this.checked;
@@ -32,6 +34,7 @@ $(document).on('change', '#complete-checkbox', function (event) {
   updateTaskStatusOnServer(taskId, isComplete);
 
 });
+
 
 /**
  * This function handles form submission for new tasks. After successfully posting a new task, it loads the updated tasks.
@@ -109,8 +112,20 @@ const createTaskElement = function (taskData) {
   <div class="list-container">
     <div class="left-column">
       <form action="/tasks/:id" method="POST">
-      <input type="checkbox" name="is_complete" data-task-id="${taskData.id}" id ="complete-checkbox" class="checkbox" ${taskData.is_complete ? 'checked' : ''} />
-      ${icon}
+      <input type="checkbox" name="is_complete" data-task-id="${taskData.id}"  class="checkbox" ${taskData.is_complete ? 'checked' : ''} />
+
+    <div class="category-dropdown" id="category-dropdown-${taskData.id}" onclick="toggleDropdown(${taskData.id})">
+      <div class="selected-category">
+        ${icon}
+      </div>
+      <ul class="dropdown-list" style="display: none;">
+        <li><i class="fa-solid fa-burger fa-2xl" data-category-id="1"></i></li>
+        <li><i class="fa-solid fa-book fa-2xl" data-category-id="2"></i></li>
+        <li><i class="fa-solid fa-desktop fa-2xl" data-category-id="3"></i></li>
+        <li><i class="fa-solid fa-cart-shopping fa-2xl" data-category-id="4"></i></li>
+        <li><i class="fa-regular fa-lightbulb fa-2xl" data-category-id="5"></i></li>
+    </ul>
+  </div>
       <p class="task-description">${taskData.description}</p>
     </form>
     </div>
@@ -173,3 +188,27 @@ const updateTaskStatusOnServer = function (taskId, isComplete) {
     });
 };
 
+const toggleDropdown = function (taskId) {
+
+  const dropdownList = $(`#category-dropdown-${taskId} .dropdown-list`);
+  dropdownList.toggle();
+
+  // Update task category
+  $(`#category-dropdown-${taskId} .dropdown-list li`).on('click', function (event) {
+    event.preventDefault();
+    const categoryId = $(this).find('i').data('category-id');
+    const selectedIcon = $(this).find('i').clone();
+
+    $(`#category-dropdown-${taskId} .selectedCategory`).empty().append(selectedIcon);
+
+    $.post(`/tasks/${taskId}`, { taskId, categoryId })
+      .then(() => {
+        loadTasks();
+      })
+      .catch((error) => {
+        console.error('Error updating task status:', error);
+      });
+  });
+};
+
+$("");

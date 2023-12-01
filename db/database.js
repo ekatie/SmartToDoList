@@ -128,10 +128,11 @@ VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;`;
  * @return {Promise<{}>} A promise to the task category.
  */
 const editTaskCategory = function (taskId, taskCategoryId) {
+
   const query = `
   UPDATE tasks
   SET category_id = $1
-  WHERE task.id = $2 RETURNING *;`;
+  WHERE tasks.id = $2 RETURNING *;`;
 
   const values = [taskCategoryId, taskId];
 
