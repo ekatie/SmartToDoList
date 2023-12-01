@@ -29,16 +29,50 @@ $(document).ready(function () {
       loadTasks();
     }
   });
+  // Load tasks
   loadTasks();
 });
 
 // Task marked as complete
-$(document).on("change", "#complete-checkbox", function (event) {
-  const taskId = $(this).data("task-id");
+$(document).on('change', '.checkbox', function (event) {
+
+  const taskId = $(this).data('task-id');
   const isComplete = this.checked;
 
   updateTaskStatusOnServer(taskId, isComplete);
 });
+
+// Delete task
+$(document).on('click', 'i.fa-trash-can', function (event) {
+  const taskId = $(this).data('task-id');
+
+  swal({
+    title: "Are you sure?",
+    text: "Once deleted, you will not be able to recover this task!",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+    .then((willDelete) => {
+      if (willDelete) {
+        deleteTask(taskId);
+      }
+    });
+});
+
+const deleteTask = function (taskId) {
+
+  $.post(`/tasks/${taskId}/delete`, { taskId })
+    .then((response) => {
+      swal(response.message);
+      loadTasks();
+    })
+    .catch((error) => {
+      $('#error').text("Oops! An error occurred while deleting your task.");
+      $('#error').slideDown();
+    });
+};
+
 
 /**
  * This function handles form submission for new tasks. After successfully posting a new task, it loads the updated tasks.
@@ -123,30 +157,28 @@ const createTaskElement = function (taskData) {
   <div class="list-container">
     <div class="left-column">
       <form action="/tasks/:id" method="POST">
-      <input type="checkbox" name="is_complete" data-task-id="${
-        taskData.id
-      }" id ="complete-checkbox" class="checkbox" ${
-    taskData.is_complete ? "checked" : ""
-  } />
-      ${icon}
+      <input type="checkbox" name="is_complete" data-task-id="${taskData.id}"  class="checkbox" ${taskData.is_complete ? 'checked' : ''} />
+
+    <div class="category-dropdown" id="category-dropdown-${taskData.id}" onclick="toggleDropdown(${taskData.id})">
+      <div class="selected-category">
+        ${icon}
+      </div>
+      <ul class="dropdown-list" style="display: none;">
+        <li><i class="fa-solid fa-burger fa-2xl" data-category-id="1"></i></li>
+        <li><i class="fa-solid fa-book fa-2xl" data-category-id="2"></i></li>
+        <li><i class="fa-solid fa-desktop fa-2xl" data-category-id="3"></i></li>
+        <li><i class="fa-solid fa-cart-shopping fa-2xl" data-category-id="4"></i></li>
+        <li><i class="fa-regular fa-lightbulb fa-2xl" data-category-id="5"></i></li>
+    </ul>
+  </div>
       <p class="task-description">${taskData.description}</p>
     </form>
     </div>
     <div class="right-column">
       <div class="editIcons">
-      ${
-        taskData.due_date
-          ? `<p>Due: ${new Intl.DateTimeFormat("en-US", dateOptions).format(
-              new Date(taskData.due_date)
-            )}</p>`
-          : ""
-      }
-      ${
-        taskData.is_priority
-          ? '<i class="fa-solid fa-exclamation fa-2xl"></i>'
-          : ""
-      }
-      <i class="fa-solid fa-trash-can fa-2xl"></i>
+      ${taskData.due_date ? `<p>Due: ${new Intl.DateTimeFormat('en-US', dateOptions).format(new Date(taskData.due_date))}</p>` : ''}
+      ${taskData.is_priority ? '<i class="fa-solid fa-exclamation fa-2xl"></i>' : ''}
+      <i class="fa-solid fa-trash-can fa-2xl" data-task-id="${taskData.id}"></i>
       </div>
       <div class="timestamp">
       ${
@@ -208,3 +240,28 @@ const updateTaskStatusOnServer = function (taskId, isComplete) {
       console.error("Error updating task status:", error);
     });
 };
+
+const toggleDropdown = function (taskId) {
+
+  const dropdownList = $(`#category-dropdown-${taskId} .dropdown-list`);
+  dropdownList.toggle();
+
+  // Update task category
+  $(`#category-dropdown-${taskId} .dropdown-list li`).on('click', function (event) {
+    event.preventDefault();
+    const categoryId = $(this).find('i').data('category-id');
+    const selectedIcon = $(this).find('i').clone();
+
+    $(`#category-dropdown-${taskId} .selectedCategory`).empty().append(selectedIcon);
+
+    $.post(`/tasks/${taskId}`, { taskId, categoryId })
+      .then(() => {
+        loadTasks();
+      })
+      .catch((error) => {
+        console.error('Error updating task status:', error);
+      });
+  });
+};
+
+$("");
