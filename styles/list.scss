@@ -175,9 +175,11 @@
     input[type=checkbox] {
       margin-left: 12px;
     }
-form {
-display: flex;
-align-items: center;}
+
+    form {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .editIcons {
@@ -205,15 +207,66 @@ align-items: center;}
   color: rgb(96, 93, 255);
 }
 
-input[type="checkbox"]:checked ~ p {
+input[type="checkbox"]:checked~p {
   text-decoration: line-through;
   text-decoration-color: red;
   color: #dedede;
 }
 
-input[type="checkbox"]:checked ~ i {
+input[type="checkbox"]:checked~i {
   color: #dedede;
 }
 
+#list-container {
+
+  .category-dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+    .dropdown-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(255, 255, 255, 1);
+      border: 1px solid #ccc;
+      border-top: none;
+      border-radius: 0 0 5px 5px;
+      display: none;
+      z-index: 1000;
+
+      li {
+        padding: 5px;
+        color: #73abfa;
+        cursor: pointer;
 
 
+        .fa-lightbulb {
+          margin-left: 15px;
+        }
+
+        .fa-book {
+          margin-left: 12px;
+        }
+
+        .fa-desktop {
+          margin: 0px 5px 0px 10px;
+        }
+
+        .fa-cart-shopping {
+          margin: 0px 5px 0px 6px;
+        }
+
+        .selected-category {
+          display: flex;
+          align-items: center;
+          padding: 5px;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}
