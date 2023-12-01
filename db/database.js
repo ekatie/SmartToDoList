@@ -173,7 +173,7 @@ const updateTaskStatus = function (taskId, isComplete) {
 const deleteTask = function (taskId) {
   const query = `
   DELETE FROM tasks
-  WHERE task.id = $1;`;
+  WHERE tasks.id = $1;`;
 
   const values = [taskId];
 
