@@ -264,8 +264,9 @@ input[type="checkbox"]:checked~i {
       }
     }
   }
+}
 
-  // Responsive design section
+// Responsive design section
 
 //Remove text area min-width and left-column min width below 1320px screen width
 @media only screen and (max-width: 1320px) {
