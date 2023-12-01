@@ -98,6 +98,7 @@ const addTask = async function (task) {
         ? checkForCategoryKeywords(category_name)
         : 5;
     } catch (err) {
+      task.category_id = 5;
       console.log(err);
     }
   }
