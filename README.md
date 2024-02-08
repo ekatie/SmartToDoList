@@ -23,6 +23,7 @@ This project is built with the following technologies:
 - **Frontend**: jQuery, JavaScript, Sass, CSS, HTML
 - **Backend**: Express, Node.js
 - **Database**: PostgreSQL, SQL
+- **Integrations**: Utilizes the OpenAI API for intelligent categorization of items into predefined lists.
 
 ## Getting Started
 
@@ -78,3 +79,21 @@ This project relies on several third-party packages to function correctly. Below
 - **nodemon** (^2.0.22): A utility that monitors for any changes in your source and automatically restarts your server. Ideal for development to improve efficiency.
 
 Ensure you have Node.js installed on your system to use these packages. You can install the dependencies by running npm install in the project directory.
+
+## Screenshots
+
+### Smart To Do List Home Page (with Animations)
+
+![Project Home Page](https://github.com/ekatie/SmartToDoList/blob/main/docs/ToDoList%20-%20Loading.gif?raw=true)
+
+#### Add New Task
+
+![Add New Task](https://github.com/ekatie/SmartToDoList/blob/main/docs/ToDoList%20-%20Add%20Task.gif?raw=true)
+
+#### Edit Task Category
+
+![Edit Task Category](https://github.com/ekatie/SmartToDoList/blob/main/docs/ToDoList%20-%20Edit%20Category.gif?raw=true)
+
+#### Sort By Category
+
+![Sort By Category](https://github.com/ekatie/SmartToDoList/blob/main/docs/ToDoList%20-%20Sort%20By%20Category.gif?raw=true)
